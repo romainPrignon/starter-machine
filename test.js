@@ -1,18 +1,39 @@
 const {framework} = require('./framework')
 
-const GREEN_COLOR = '\033[0;32m'
-const NO_COLOR = '\033[m'
+const GREEN_COLOR = '$(tput setaf 2)'
+const NO_COLOR = '$(tput sgr0)'
 
-const colofull = () => `echo with color ${GREEN_COLOR}$(${msg()})${NO_COLOR} and without $(${barMsg()})`
+const colorfull = (mine) => `echo with color mine ${GREEN_COLOR}${mine}${NO_COLOR} and ${GREEN_COLOR}$(${msg()})${NO_COLOR} and without $(${barMsg()})`
 
 const msg = () => `echo $(${barMsg()})`
 
 const barMsg = () => `echo bar`
 
-const containers = () => `docker ps`
 
+const closure = bar => foo => `echo ${foo} ${bar ? bar: ``}`
+
+
+const echoEnv = () => `echo $FOO`
+
+function* testEnv() {
+    yield `echo $PATH`
+    yield echoEnv()
+}
+
+
+function* goDeeper() {
+    yield `boo`
+}
+
+function* testError() {
+    yield* goDeeper()
+}
+
+
+const containers = () => `docker ps`
 const createContainer = (name) => `docker run -dit --name ${name} ubuntu /bin/bash`
 const removeContainer = (name) => `docker stop ${name} && docker rm ${name}`
+const dockerExec = (containerName, cmd, env) => `docker exec -t -e ${env} ${containerName} ${cmd}`
 
 function* createAbstraction() {
     yield createContainer('foo')
@@ -24,25 +45,20 @@ function* removeAbstraction() {
     yield removeContainer('bar')
 }
 
-const dockerExec = (containerName, cmd, env) => `docker exec -e ${env} ${containerName} ${cmd}`
-
 function* createMultipleContainers() {
     yield* createAbstraction()
     yield containers()
     yield* removeAbstraction()
 }
 
-function* goDeeper() {
-    yield `boo`
-}
-
-function* testError() {
-    yield* goDeeper()
-}
-
 function* provision_dev_machine() {
     yield createContainer('dev_machine')
-    yield dockerExec('dev_machine', 'echo $FOO', 'FOO=bar')
+    //test if working
+    yield removeContainer('dev_machine')
+}
+
+function* cd() {
+    yield `cd /home/romainprignon/workspace && ls`
 }
 
 function* removeGoogleMachine(name) {
@@ -128,11 +144,15 @@ function* remove() {
 }
 
 const main = () => {
-//   framework({output: true})(createMultipleContainers)
-//   framework({output: true})(testError)
+  framework({output: true, verbose: true})(colorfull, 'romain')
+//   framework({output: true, verbose: true, env: {FOO: 'romain'}})(testEnv)
+//   framework({output: true, verbose: true})(createMultipleContainers)
+//   framework({output: true, verbose: true})(testError)
 //   framework({output: true, verbose: true})(provision_dev_machine)
+//   framework({output: true, verbose: true})(cd)
 //   framework({output: true, verbose: true})(create)
-  framework({output: true, verbose: true})(remove)
+//   framework({output: true, verbose: true})(remove)
+//   framework({output: true, verbose: true})(closure)
 }
 
 main()
