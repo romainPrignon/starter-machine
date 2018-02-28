@@ -10,9 +10,6 @@ const msg = () => `echo $(${barMsg()})`
 const barMsg = () => `echo bar`
 
 
-const closure = bar => foo => `echo ${foo} ${bar ? bar: ``}`
-
-
 const echoEnv = () => `echo $FOO`
 
 function* testEnv() {
@@ -143,8 +140,21 @@ function* remove() {
     yield* removeGoogleMachine('stack-name--prod--wrkr-1')
 }
 
+// ============= async ===============
+const longEcho = async (params) => new Promise((resolve, reject) => {
+    setTimeout(() => resolve(`echo coucou ${params}`), 1000)
+})
+
+const asyncFn = async (params) => longEcho(params)
+
+const asyncFn2 = (params) => [`echo ${params}`, `echo 2 ${params}`]
+function* asyncGen(params) {
+    const [res1, res2] = yield [`echo ${params}`, `echo 2 ${params}`] // const [res1, reS2] = yield [.....]
+    console.log(res1, res2)
+}
+
 const main = () => {
-  framework({output: true, verbose: true})(colorfull, 'romain')
+//   framework({output: true, verbose: true})(colorfull, 'romain')
 //   framework({output: true, verbose: true, env: {FOO: 'romain'}})(testEnv)
 //   framework({output: true, verbose: true})(createMultipleContainers)
 //   framework({output: true, verbose: true})(testError)
@@ -152,7 +162,10 @@ const main = () => {
 //   framework({output: true, verbose: true})(cd)
 //   framework({output: true, verbose: true})(create)
 //   framework({output: true, verbose: true})(remove)
-//   framework({output: true, verbose: true})(closure)
+
+  framework({output: true, verbose: true})(asyncFn, 'romain')
+//   framework({output: true, verbose: true})(asyncFn2, 'romain')
+//   framework({output: true, verbose: true})(asyncGen, 'romain')
 }
 
 main()
