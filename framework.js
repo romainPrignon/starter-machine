@@ -135,6 +135,14 @@ const framework = (options) => async (fn, ...args) => {
     }
 }
 
+const pipe = (f1, ...fns) =>
+    (...args) =>
+        fns.reduce(
+            (res, fn) => `${res} | ${fn()}`,
+            f1.apply(null,args)
+        )
+
 module.exports = {
-    framework
+    framework,
+    pipe
 }
