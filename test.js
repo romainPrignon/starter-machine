@@ -1,4 +1,4 @@
-const {framework} = require('./framework')
+const {framework, pipe} = require('./framework')
 
 const GREEN_COLOR = '$(tput setaf 2)'
 const NO_COLOR = '$(tput sgr0)'
@@ -27,6 +27,76 @@ function* testError() {
 }
 
 
+function* testIf(dummyBoolean) {
+    yield `if ${dummyBoolean}; then echo yes; else echo no; fi`
+    yield dummyBoolean ? `echo yes` : `echo no`
+}
+
+
+function ls() {return `ls -lah`}
+function grepGit() {return `grep .git`}
+function cat() {return `cat`}
+
+function* testPipe() {
+    yield `ls -lah | grep .git | cat`
+
+    const displayGitRelatedFolder = pipe(ls, grepGit, cat)
+    yield displayGitRelatedFolder()
+}
+
+
+const emptyString = () => ``
+function* testEmpty() {
+    yield `echo foo`
+    yield emptyString()
+    yield `echo foo`
+}
+const testEmpty2 = () => ``
+
+
+function* redirection() {
+    // =======================
+    yield `echo bar > foo.txt`
+    yield `cat foo.txt`
+    yield `rm foo.txt`
+
+    // =======================
+
+    yield `echo "touch fiz" >> fs.sh`
+    yield `echo "ls" >> fs.sh`
+    yield `echo "rm fiz" >> fs.sh`
+    yield `chmod a+x fs.sh`
+
+    yield `./fs.sh` // actual exec inner script
+
+    yield `rm fs.sh`
+
+    // =======================
+
+    yield `ls > ls.txt`
+    yield `wc -l < ls.txt`
+    yield `rm ls.txt`
+
+    // =======================
+
+    yield `undefined_cmd 2>&1 | tee error.log`
+    yield `cat error.log`
+    yield `rm error.log`
+}
+
+
+function* cd() {
+    yield `cd /home/romainprignon/workspace && ls`
+}
+
+
+function* testInterrupt() {
+    yield `echo "try to interrupt me"`
+    yield `sleep 3`
+    yield `echo "echo after 3"`
+}
+
+
 const containers = () => `docker ps`
 const createContainer = (name) => `docker run -dit --name ${name} ubuntu /bin/bash`
 const removeContainer = (name) => `docker stop ${name} && docker rm ${name}`
@@ -48,15 +118,6 @@ function* createMultipleContainers() {
     yield* removeAbstraction()
 }
 
-function* provision_dev_machine() {
-    yield createContainer('dev_machine')
-    //test if working
-    yield removeContainer('dev_machine')
-}
-
-function* cd() {
-    yield `cd /home/romainprignon/workspace && ls`
-}
 
 function* removeGoogleMachine(name) {
     yield `docker-machine rm -f ${name}`
@@ -149,23 +210,69 @@ const asyncFn = async (params) => longEcho(params)
 
 const asyncFn2 = (params) => [`echo ${params}`, `echo 2 ${params}`]
 function* asyncGen(params) {
-    const [res1, res2] = yield [`echo ${params}`, `echo 2 ${params}`] // const [res1, reS2] = yield [.....]
+    const [res1, res2] = yield [`echo ${params}`, `echo 2 ${params}`]
     console.log(res1, res2)
+}
+
+const race1 = () => `sleep 2 && echo "sleep for 2s"`
+const race2 = () => `sleep 1 && echo "sleep for 1s"`
+function* testRace() {
+    yield [race1(), race2()]
+}
+
+function* gen1() {
+    yield `sleep 2`
+    yield `echo "echo after 2s"`
+}
+function* gen2() {
+    yield `sleep 1`
+    yield `echo "echo after 1s"`
+}
+function* testParallelGen() {
+    yield [gen1(), gen2()]
+}
+
+// ============= ssh ===================
+const testSSH = () => `uptime`
+
+function* generatorAsSSH(params) {
+    yield `echo Hello ${params}`
+    yield `uptime`
+    yield `echo bye`
+}
+
+function* parallelSSH() {
+    yield [`uptime`, `hostname`]
 }
 
 const main = () => {
 //   framework({output: true, verbose: true})(colorfull, 'romain')
+
 //   framework({output: true, verbose: true, env: {FOO: 'romain'}})(testEnv)
+
 //   framework({output: true, verbose: true})(createMultipleContainers)
+
 //   framework({output: true, verbose: true})(testError)
-//   framework({output: true, verbose: true})(provision_dev_machine)
+//   framework({output: true, verbose: true})(testIf, true)
+//   framework({output: true, verbose: true})(testPipe, true)
+//   framework({output: true, verbose: true})(testEmpty, true)
+//   framework({output: true, verbose: true})(testEmpty2, true)
+//   framework({output: true, verbose: true})(redirection, true)
 //   framework({output: true, verbose: true})(cd)
+//   framework({output: true, verbose: true})(testInterrupt)
+
 //   framework({output: true, verbose: true})(create)
 //   framework({output: true, verbose: true})(remove)
 
-  framework({output: true, verbose: true})(asyncFn, 'romain')
+//   framework({output: true, verbose: true})(asyncFn, 'romain')
 //   framework({output: true, verbose: true})(asyncFn2, 'romain')
 //   framework({output: true, verbose: true})(asyncGen, 'romain')
+  framework({output: true, verbose: true})(testRace)
+//   framework({output: true, verbose: true})(testParallelGen)
+
+//   framework({output: true, verbose: true, ssh: true})(testSSH)
+//   framework({output: true, verbose: true, ssh: true})(generatorAsSSH, 'romain')
+//   framework({output: true, verbose: true, ssh: true})(parallelSSH)
 }
 
 main()
