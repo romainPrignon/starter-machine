@@ -5,6 +5,7 @@ const {Client} = require('ssh2')
 
 const isGenerator = (fn) => fn.constructor.name === 'GeneratorFunction'
 const isAsync = (fn) => fn.constructor.name === 'AsyncFunction'
+const isEmpty = (cmd) => !cmd.length
 
 const process = async (cmd, options = {}) => {
     if (isArray(cmd)) {
@@ -87,6 +88,8 @@ const framework = (options) => async (fn, ...args) => {
     if (!isGenerator(fn)) {
         const cmd = await fn(...args)
 
+        if (isEmpty(cmd)) return 0
+
         if (options.verbose) console.log(`➜ ${cmd}`)
 
         if (isArray(cmd)) {
@@ -105,23 +108,31 @@ const framework = (options) => async (fn, ...args) => {
     let next = it.next()
 
     while (next.done === false) {
+        if (isEmpty(next.value)) {
+            next = it.next('')
+            continue
+        }
+
         console.log(`\n`)
 
         if (options.verbose) console.log(`➜ ${next.value}`)
 
         if (isArray(next.value)) {
-            const res = await process(next.value, {env: options.env})
+            const res = await process(next.value, {env: options.env, ssh})
             const out = res.map(r => r.stdout)
             if (options.output) out.map(o => console.log(`• ${o}`))
             next = it.next(out)
         } else {
-            const res = await process(next.value, {env: options.env})
-            if (options.output) console.log(`• ${res.stdout}`)
+            const res = await process(next.value, {env: options.env, ssh})
+            if (options.output && res.stdout) console.log(`• ${res.stdout}`)
             next = it.next(res.stdout)
         }
     }
     // last iteration
-    next.value && console.log(shellSync(next.value).stdout)
+    if (next.value) {
+        const lastCmd = shellSync(next.value)
+        console.log(lastCmd.stdout)
+    }
 }
 
 module.exports = {
