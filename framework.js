@@ -24,8 +24,42 @@ const process = async (cmd, options = {}) => {
                 }
             }
 
-            const res = shell(c, options)
-            return res
+            if (typeof c.next === 'function') {
+                let next = c.next()
+                let res
+                while (next.done === false) {
+                    if (isEmpty(next.value)) {
+                        next = c.next('')
+                        continue
+                    }
+
+                    console.log(`\n`)
+
+                    console.log(`➜ ${next.value}`)
+
+                    if (isArray(next.value)) {
+                        res = await process(next.value, {env: options.env, ssh: options.ssh})
+                        const out = res.map(r => r.stdout)
+                        if (options.output) out.map(o => console.log(`• ${o}`))
+                        next = c.next(out)
+                    } else {
+                        res = await process(next.value, {env: options.env, ssh: options.ssh})
+                        // res = await shell(next.value, options)
+                        if (res.stdout) console.log(`• ${res.stdout}`)
+                        next = c.next(res.stdout)
+                    }
+                }
+                // last iteration
+                if (next.value) {
+                    res = await shell(next.value)
+                    console.log(res.stdout)
+                }
+
+                return res
+            } else {
+                const res = await shell(c, options)
+                return res
+            }
         }))
     }
 
@@ -43,8 +77,7 @@ const process = async (cmd, options = {}) => {
         }
     }
 
-    const res = shellSync(cmd, options)
-    return res
+    return await shell(cmd, options)
 }
 
 const handleSSH = (host, port, username, privateKey) => async (cmd) => {
@@ -120,7 +153,7 @@ const framework = (options) => async (fn, ...args) => {
         if (isArray(next.value)) {
             const res = await process(next.value, {env: options.env, ssh})
             const out = res.map(r => r.stdout)
-            if (options.output) out.map(o => console.log(`• ${o}`))
+            if (options.output) out.map(o => console.log(`Array(•) ${o}`))
             next = it.next(out)
         } else {
             const res = await process(next.value, {env: options.env, ssh})

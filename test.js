@@ -225,22 +225,27 @@ function* asyncGen(params) {
     console.log(res1, res2)
 }
 
-const race1 = () => `sleep 2 && echo "sleep for 2s"`
-const race2 = () => `sleep 1 && echo "sleep for 1s"`
+const race1 = () => `sleep 5 && echo "sleep for 5s"`
+const race2 = () => `sleep 2 && echo "sleep for 2s"`
 function* testRace() {
     yield [race1(), race2()]
 }
 
+function* gen0() {
+    yield `sleep 5`
+    yield `echo "echo after 5s"`
+}
 function* gen1() {
+    yield [gen0()]
+}
+function* gen2() {
     yield `sleep 2`
     yield `echo "echo after 2s"`
 }
-function* gen2() {
-    yield `sleep 1`
-    yield `echo "echo after 1s"`
-}
 function* testParallelGen() {
+    yield `echo begin`
     yield [gen1(), gen2()]
+    yield `echo end`
 }
 
 // ============= ssh ===================
@@ -263,7 +268,7 @@ const main = () => {
 
 //   framework({output: true, verbose: true})(createMultipleContainers)
 
-  framework({output: true, verbose: true})(testInnerGen)
+//   framework({output: true, verbose: true})(testInnerGen)
 //   framework({output: true, verbose: true})(testError)
 //   framework({output: true, verbose: true})(testIf, true)
 //   framework({output: true, verbose: true})(testPipe, true)
