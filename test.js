@@ -18,6 +18,17 @@ function* testEnv() {
 }
 
 
+function* deepestGen() {
+    yield `echo deepest`
+}
+function* deeperGen() {
+    yield* deepestGen()
+}
+function* testInnerGen() {
+    yield* deeperGen()
+}
+
+
 function* goDeeper() {
     yield `boo`
 }
@@ -252,6 +263,7 @@ const main = () => {
 
 //   framework({output: true, verbose: true})(createMultipleContainers)
 
+  framework({output: true, verbose: true})(testInnerGen)
 //   framework({output: true, verbose: true})(testError)
 //   framework({output: true, verbose: true})(testIf, true)
 //   framework({output: true, verbose: true})(testPipe, true)
@@ -267,7 +279,7 @@ const main = () => {
 //   framework({output: true, verbose: true})(asyncFn, 'romain')
 //   framework({output: true, verbose: true})(asyncFn2, 'romain')
 //   framework({output: true, verbose: true})(asyncGen, 'romain')
-  framework({output: true, verbose: true})(testRace)
+//   framework({output: true, verbose: true})(testRace)
 //   framework({output: true, verbose: true})(testParallelGen)
 
 //   framework({output: true, verbose: true, ssh: true})(testSSH)
