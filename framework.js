@@ -6,6 +6,7 @@ const {Client} = require('ssh2')
 const isGenerator = (fn) => fn.constructor.name === 'GeneratorFunction'
 const isAsync = (fn) => fn.constructor.name === 'AsyncFunction'
 const isEmpty = (cmd) => !cmd.length
+const cleanStr = (str) => str.replace(/  +/g, ' ')
 
 const process = async (cmd, options = {}) => {
     if (isArray(cmd)) {
@@ -114,7 +115,6 @@ const handleSSH = (host, port, username, privateKey) => async (cmd) => {
 // @TODO
 // handle multiline command verbose
 // stream cmd output
-// parallel generator
 const framework = (options) => async (fn, ...args) => {
     const ssh = options.ssh && handleSSH('35.198.126.29', 22, 'romainprignon', require('fs').readFileSync('/home/romainprignon/.ssh/google_compute_engine'))
 
@@ -148,7 +148,9 @@ const framework = (options) => async (fn, ...args) => {
 
         console.log(`\n`)
 
-        if (options.verbose) console.log(`➜ ${next.value}`)
+        if (options.verbose) {
+            console.log(cleanStr(`➜ ${next.value}`))
+        }
 
         if (isArray(next.value)) {
             const res = await process(next.value, {env: options.env, ssh})

@@ -10,6 +10,24 @@ const msg = () => `echo $(${barMsg()})`
 const barMsg = () => `echo bar`
 
 
+function* multiline(params) {
+    yield `
+        echo "this is first line"
+        echo "hello ${params}"
+        echo =================
+        uptime
+        echo ==================
+        echo "this is last line"
+    `
+}
+
+
+function* splitline() {
+    yield `docker images \
+        --digests > /dev/null`
+}
+
+
 const echoEnv = () => `echo $FOO`
 
 function* testEnv() {
@@ -263,6 +281,8 @@ function* parallelSSH() {
 
 const main = () => {
 //   framework({output: true, verbose: true})(colorfull, 'romain')
+  framework({output: true, verbose: true})(multiline, 'romain')
+  framework({output: true, verbose: true})(splitline)
 
 //   framework({output: true, verbose: true, env: {FOO: 'romain'}})(testEnv)
 
