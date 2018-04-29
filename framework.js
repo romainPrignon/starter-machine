@@ -8,7 +8,7 @@ const isAsync = (fn) => fn.constructor.name === 'AsyncFunction'
 const isEmpty = (cmd) => !cmd.length
 const cleanStr = (str) => str.replace(/  +/g, ' ')
 
-const process = async (cmd, options = {}) => {
+const processCmd = async (cmd, options = {}) => {
     if (isArray(cmd)) {
         return await Promise.all(cmd.map(async(c) => {
             if (options.ssh) {
@@ -39,13 +39,12 @@ const process = async (cmd, options = {}) => {
                     console.log(`➜ ${next.value}`)
 
                     if (isArray(next.value)) {
-                        res = await process(next.value, {env: options.env, ssh: options.ssh})
+                        res = await processCmd(next.value, {env: options.env, ssh: options.ssh})
                         const out = res.map(r => r.stdout)
                         if (options.output) out.map(o => console.log(`• ${o}`))
                         next = c.next(out)
                     } else {
-                        res = await process(next.value, {env: options.env, ssh: options.ssh})
-                        // res = await shell(next.value, options)
+                        res = await processCmd(next.value, {env: options.env, ssh: options.ssh})
                         if (res.stdout) console.log(`• ${res.stdout}`)
                         next = c.next(res.stdout)
                     }
@@ -126,11 +125,12 @@ const framework = (options) => async (fn, ...args) => {
         if (options.verbose) console.log(`➜ ${cmd}`)
 
         if (isArray(cmd)) {
-            const res = await process(cmd, {env: options.env, ssh})
+            const res = await processCmd(cmd, {env: options.env, ssh})
             if (options.output) res.map(r => console.log(`• ${r.stdout}`))
         } else {
-            const res = await process(cmd, {env: options.env, ssh})
+            const res = processCmd(cmd, {env: options.env, ssh})
             if (options.output && res.stdout) console.log(`• ${res.stdout}`)
+            // if (options.output && res) res.pipe(process.stdout)
         }
 
         return 0
@@ -153,20 +153,23 @@ const framework = (options) => async (fn, ...args) => {
         }
 
         if (isArray(next.value)) {
-            const res = await process(next.value, {env: options.env, ssh})
+            const res = await processCmd(next.value, {env: options.env, ssh})
             const out = res.map(r => r.stdout)
             if (options.output) out.map(o => console.log(`Array(•) ${o}`))
             next = it.next(out)
         } else {
-            const res = await process(next.value, {env: options.env, ssh})
+            const res = await processCmd(next.value, {env: options.env, ssh})
             if (options.output && res.stdout) console.log(`• ${res.stdout}`)
+            // if (options.output && res) res.pipe(process.stdout)
             next = it.next(res.stdout)
         }
     }
     // last iteration
     if (next.value) {
-        const lastCmd = shellSync(next.value)
+        const lastCmd = await shell(next.value)
+        // const lastCmd = await shell(next.value).stdout
         console.log(lastCmd.stdout)
+        // if (options.output && lastCmd) lastCmd.pipe(process.stdout)
     }
 }
 

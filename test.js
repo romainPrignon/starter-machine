@@ -28,6 +28,20 @@ function* splitline() {
 }
 
 
+function* stream() {
+    // yield `while sleep 1; do echo boo; done`
+}
+
+
+function* echo12345() {
+    yield `echo 1`
+    yield `echo 2`
+    yield `echo 3`
+    yield `echo 4`
+    yield `echo 5`
+}
+
+
 const echoEnv = () => `echo $FOO`
 
 function* testEnv() {
@@ -281,8 +295,10 @@ function* parallelSSH() {
 
 const main = () => {
 //   framework({output: true, verbose: true})(colorfull, 'romain')
-  framework({output: true, verbose: true})(multiline, 'romain')
-  framework({output: true, verbose: true})(splitline)
+//   framework({output: true, verbose: true})(multiline, 'romain')
+//   framework({output: true, verbose: true})(splitline)
+//   framework({output: true, verbose: true})(stream)
+  framework({output: true, verbose: true})(echo12345)
 
 //   framework({output: true, verbose: true, env: {FOO: 'romain'}})(testEnv)
 
