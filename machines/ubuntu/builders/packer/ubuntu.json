@@ -1,0 +1,38 @@
+{
+    "builders": [
+        {
+            "type": "virtualbox-ovf",
+            "source_path": "machines/ubuntu/builders/packer/ubuntu.ovf",
+            "vm_name": "{{user `vm_name`}}",
+            "ssh_username": "{{user `ssh_username`}}",
+            "ssh_password": "{{user `ssh_password`}}",
+            "headless": true,
+            "shutdown_command": "sudo -S shutdown -P now",
+            "vboxmanage": [
+                [
+                    "modifyvm",
+                    "{{.Name}}",
+                    "--memory",
+                    "1024"
+                ],
+                [
+                    "modifyvm",
+                    "{{.Name}}",
+                    "--cpus",
+                    "4"
+                ]
+            ]
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "shell",
+            "execute_command": "bash '{{.Path}}'",
+            "scripts": [
+                "machines/ubuntu/scripts/install_node.sh"
+            ]
+        }
+    ],
+    "post-processors": [
+    ]
+}

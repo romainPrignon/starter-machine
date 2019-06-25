@@ -1,23 +1,24 @@
 {
   "name": "starter-machine",
-  "version": "1.0.0",
-  "description": "LOGGING ======= normal: tail <file> stream: tail -f <file>",
-  "main": "framework.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "version": "0.0.1",
+  "description": "Starter to easily create server machines",
+  "author": "Romain Prignon <pro.rprignon@gmail.com>",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/romainPrignon/starter-machine.git"
   },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/romainPrignon/starter-machine/issues"
+  "engines": {
+    "node": "^10",
+    "npm": "^6.3"
   },
-  "homepage": "https://github.com/romainPrignon/starter-machine#readme",
   "dependencies": {
-    "execa": "0.9.0",
-    "ssh2": "0.5.5"
+    "husky": "^1.3.1",
+    "unshell": "^0.8.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "make lint && make build && make test"
+    }
   }
 }

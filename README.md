@@ -1,9 +1,48 @@
-TODO
-====
+# starter-machine
 
-- remove framework.js, Dockerfile, provision.js, test.js 
-- clean makefile
-- use pontem for machine provisioning
+> Starter to easily create server machines
+
+# Setup
+First, you need to install dependencies
+```sh
+make install
+```
+
+# Usage
+Here is a detailled list of available commands
+
+## release: metal
+```sh
+make release-metal
+```
+will do: VBoxManage clonehd your-virtualbox-disk.vdi disk.img --format RAW
+will put it into releases folder with a readme containing instruction
+- https://superuser.com/questions/114445/is-it-possible-to-convert-virtual-machines-to-physical-environments
+- sudo dd if=disk.img of=/dev/sdX
+
+
+# TODO
+
+## linuxkit
+- build my own linux
+
+## Packer (currently working)
+- choose ubuntu vs alpine
+- install packer as dependencies (make setup)
+- lint json
+- add test (packer lint, test image, diff iamge,...)
+- use unshell for provisioning
+- do release-metal command
+- 
+
+## docker
+- how to build an iso from dockerfile
+iso -> tar
+tar -> docker
+docker -> tar
+tar -> fs
+fs -> iso (gentoimage)
+
 
 LOGGING
 =======
