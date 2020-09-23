@@ -1,0 +1,27 @@
+---
+- name: create apps dir
+  file:
+    path: "{{ ansible_env.HOME }}/apps"
+    state: directory
+
+- name: install user apps
+  tags: user_apps
+  become: yes
+  apt:
+    pkg:
+      - curl
+      - ffmpeg
+      - fzf
+      - git-extras
+      - htop
+      - openssl
+      - shellcheck
+      - sqlite3
+      - tree
+      - unzip
+      - wget
+      - wmctrl
+    state: present
+    update_cache: yes
+    autoclean: yes
+    autoremove: yes

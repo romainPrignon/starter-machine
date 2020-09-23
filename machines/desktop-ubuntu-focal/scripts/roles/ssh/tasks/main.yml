@@ -1,0 +1,23 @@
+---
+- name: create ssh dir
+  file:
+    path: "{{ ansible_env.HOME }}/.ssh"
+    state: directory
+
+- name: install ssh
+  tags: ssh
+  become: yes
+  apt:
+    pkg:
+      - ssh
+    state: present
+    update_cache: yes
+    autoclean: yes
+    autoremove: yes
+
+- name: copy ssh config
+  tags: ssh
+  copy:
+    src: config
+    dest: "{{ ansible_env.HOME }}/.ssh/config"
+    mode: '0644'

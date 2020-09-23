@@ -1,0 +1,25 @@
+---
+- name: install ntp
+  tags: ntp
+  become: yes
+  apt:
+    name: ntp
+    state: present
+    update_cache: yes
+
+- name: configure ntp
+  tags: ntp
+  become: yes
+  timezone:
+    name: Europe/Paris
+
+- name: restart ntp
+  tags: ntp
+  become: yes
+  shell: service ntp restart # on ne peut pas passer par systemd car pas dans docker
+#   command: update-rc.d ntp defaults || update-rc.d ntp enable SI ON DOIT ENABLE ON STARTUP
+#   service:
+    # name: ntpd
+    # state: started
+    # enabled: yes
+

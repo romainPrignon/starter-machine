@@ -1,1 +1,4 @@
 node_modules/
+packer_cache/
+*.vmdk
+*.var.json

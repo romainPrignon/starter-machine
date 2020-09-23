@@ -1,0 +1,32 @@
+---
+- name: create micro config dir
+  tags: micro
+  file:
+    path: "{{ ansible_env.HOME }}/.config/micro"
+    state: directory
+
+- name: install micro deps
+  tags: micro
+  become: yes
+  apt:
+    pkg:
+      - curl
+    state: present
+    update_cache: yes
+    autoclean: yes
+    autoremove: yes
+
+- name: install micro
+  tags: micro
+  shell: curl -sSL https://getmic.ro | bash
+  args:
+    executable: /bin/bash
+    chdir: "{{ ansible_env.HOME }}/apps"
+    creates: "{{ ansible_env.HOME }}/apps/micro" # run if file not exist
+
+- name: copy micro config
+  tags: micro
+  copy:
+    src: settings.json
+    dest: "{{ ansible_env.HOME }}/.config/micro/settings.json"
+    mode: '0644'

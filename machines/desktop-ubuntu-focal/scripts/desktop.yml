@@ -1,0 +1,8 @@
+---
+- name: desktop
+  hosts: default
+
+  roles:
+    - role: desktop
+    - role: fonts
+    - role: desktop_apps
