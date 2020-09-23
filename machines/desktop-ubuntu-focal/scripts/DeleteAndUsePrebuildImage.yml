@@ -1,0 +1,8 @@
+---
+- name: setup
+  hosts: default
+  tasks:
+    - name: install python
+      raw: echo install python # test -e /usr/bin/python || (apt -y update && apt install -y python3-minimal python3-apt)
+
+      # peut aussi contenir: hotstname, keyboard, locale,...

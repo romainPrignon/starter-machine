@@ -1,26 +1,33 @@
-.SILENT: install lint build
-.PHONY: install lint build
+.SILENT: install lint test build check manual-check metal
+.PHONY: install lint test build check manual-check metal
 
-install: # install dependencies
-	npm install --engine-strict
-	unshell scripts/install.js
+builder?=packer
 
-lint: # lint build file ex: make lint var=ubuntu.var.json machine=ubuntu.json
-	packer validate -var-file=${var} ${machine}
+install: # boostrap dev environment ex: make install
+	ansible-galaxy install geerlingguy.php-versions geerlingguy.php geerlingguy.composer geerlingguy.php-xdebug
+	# curl packer
+	# curl virtualbox
+	# dd ...
+	# ansible
+	# ansible galaxy
 
-build-packer: # build image ex: make build-packer machine=ubuntu
-	packer build -var-file=machines/${machine}/packer/${machine}.var.json machines/${machine}/packer/${machine}.json
+lint: # lint machine build file ex: make lint machine=desktop-ubuntu-focal [builder=docker]
+	packer validate -var-file=./machines/${machine}/builders/${builder}/${machine}.var.json ./machines/${machine}/builders/${builder}/${machine}.machine.json
+	ansible-playbook ./machines/${machine}/scripts/main.yml --syntax-check
 
-import-docker:
-	sudo mkdir -p /mnt/distro/${machine}
-	tar -C /mnt/distro/${machine}  -c . | docker import - alpine-distro
-	sudo umount /mnt/distro
+test: # test script
+	echo test the script
 
-build-docker: # build using docker make build-docker
-	sudo mkdir -p /mnt/distro/${machine}
-	# sudo mount -o loop /home/romainprignon/infra/alpine-standard-3.9.4-x86_64.iso /mnt/distro/${machine}
-	docker build -t ${machine}-distro machines/${machine}/docker
-	sudo umount /mnt/distro
+build: # build image ex: make build machine=desktop-ubuntu-focal [builder=docker]
+	packer build -force -var-file=machines/${machine}/builders/${builder}/${machine}.var.json machines/${machine}/builders/${builder}/${machine}.machine.json
 
-test: # test output image
-	# test the output image
+check:
+	echo check the artefactg with tools
+
+manual-check:
+	docker run -it --rm romainprignon/desktop/ubuntu/focal:latest
+
+metal: # release on metal ex: make metal machine=desktop-ubuntu-focal A REVOIR
+	VBoxManage clonehd ./machines/${machine}/artefacts/vm/${machine}-disk001.vmdk ./machines/${machine}/artefacts/vm/${machine}.img --format RAW
+	cp -p releases/metal/README.md releases/metal/${machine}/README.md
+	cp -p releases/metal/install.sh releases/metal/${machine}/install.sh

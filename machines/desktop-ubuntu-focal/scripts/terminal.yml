@@ -1,0 +1,6 @@
+---
+- name: terminal
+  hosts: default
+  roles:
+    - role: prompt
+    - role: zsh

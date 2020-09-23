@@ -1,0 +1,43 @@
+alias ls="ls --color=auto"
+alias ll="ls -ahlF"
+alias dir="dir --color=auto"
+alias grep="grep --color=auto"
+
+# Easier navigation: .., ..., ...., ....., ~ and -
+alias -- -="cd -"
+alias ~="cd ~"
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+
+# Shortcuts
+alias d="cd ~/Documents"
+alias dl="cd ~/Downloads"
+alias w="cd ~/workspace"
+
+# Other
+alias h="history"
+
+# symfony
+alias sf2="php app/console"
+alias sf3="php bin/console"
+
+# docker
+alias dm="docker-machine"
+alias dc="docker-compose"
+
+# scripts
+alias standup="sh ~/scripts/git-standup.sh"
+alias meteo="curl -4 wttr.in/Lyon"
+alias dog="pygmentize -g"
+alias mp3="ydl -x --audio-format mp3 --audio-quality 0"
+alias mp4="ydl -f 22"
+alias sandbox="docker run -it --rm -v /home/romainprignon/sandbox:/root ubuntu:20.04"
+
+# git
+alias git-clean="git remote prune origin && git branch -vv | grep ' gone' | cut -d' ' -f1-3 | xargs -i git branch -D {}"
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'

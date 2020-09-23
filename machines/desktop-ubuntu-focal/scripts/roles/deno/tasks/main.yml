@@ -1,0 +1,26 @@
+---
+- name: install deno deps
+  tags: deno
+  become: yes
+  apt:
+    pkg:
+      - curl
+    state: present
+    update_cache: yes
+    autoclean: yes
+    autoremove: yes
+
+- name: install deno
+  tags: deno
+  shell: curl -sSL https://deno.land/x/install/install.sh | bash
+  args:
+    executable: /bin/bash
+    creates: "{{ ansible_env.HOME }}/.deno/bin/deno" # run if file not exist
+
+- name: install autocompletion
+  tags: deno
+  become: yes
+  shell: deno completions bash > /etc/bash_completion.d/deno
+  args:
+    executable: /bin/bash
+    creates: /etc/bash_completion.d/deno # run if file not exist

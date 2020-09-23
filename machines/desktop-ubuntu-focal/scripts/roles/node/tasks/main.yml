@@ -1,0 +1,35 @@
+---
+- name: install node deps
+  tags: node
+  become: yes
+  apt:
+    pkg:
+      - curl
+      - git
+      - make
+    state: present
+    update_cache: yes
+    autoclean: yes
+    autoremove: yes
+
+- name: install node
+  tags: node
+  shell: curl -sSL https://git.io/n-install | bash -s -- -y lts latest
+  args:
+    executable: /bin/bash
+    creates: "{{ ansible_env.HOME }}/n/bin/node" # run if file not exist
+
+- name: install autocompletion
+  tags: node
+  become: yes
+  shell:  npm completion > /etc/bash_completion.d/npm
+  args:
+    executable: /bin/bash
+    creates: /etc/bash_completion.d/npm # run if file not exist
+
+- name: copy npm config
+  tags: node
+  copy:
+    src: .npmrc
+    dest: "{{ ansible_env.HOME }}/.npmrc"
+    mode: '0644'

@@ -1,0 +1,42 @@
+# This is an alternative approach. Single line in git repo.
+override_git_prompt_colors() {
+  GIT_PROMPT_THEME_NAME="Single_line_Ubuntu_Romain"
+
+  User="\u";
+
+  if [ -n "$SSH_CLIENT" ]; then
+    Host=" ${White}at${ResetColor} ${BoldMagenta}\h${ResetColor}";
+  else
+    Host="";
+  fi
+
+  function prompt_callback {
+    local TITLE="# $(gp_truncate_pwd)"
+    gp_set_window_title "$TITLE"
+  }
+
+  GIT_PROMPT_BRANCH="${White}"
+
+  GIT_PROMPT_PREFIX="["
+  GIT_PROMPT_SUFFIX="]"
+  GIT_PROMPT_SEPARATOR=" |"
+  GIT_PROMPT_STAGED=" ${BoldGreen}•${ResetColor}"
+  GIT_PROMPT_CONFLICTS=" ${BoldRed}x${ResetColor}"
+  GIT_PROMPT_CHANGED=" ${BoldBlue}±${ResetColor}"
+  GIT_PROMPT_UNTRACKED=" ${BoldCyan}…${ResetColor}"
+  GIT_PROMPT_STASHED=" ${BoldBlue}⚑${ResetColor}"
+  GIT_PROMPT_CLEAN=" ${BoldGreen}√${ResetColor}"
+
+  GIT_PROMPT_SYMBOLS_AHEAD="↑·"
+  GIT_PROMPT_SYMBOLS_BEHIND="↓·"
+
+  GIT_PROMPT_COMMAND_OK="${Green}✔ "
+  GIT_PROMPT_COMMAND_FAIL="${Red}✘ "
+
+  GIT_PROMPT_START_USER="\n_LAST_COMMAND_INDICATOR_${BoldCyan}${User}${ResetColor}${Host} ${BoldYellow}${PathShort}${ResetColor}"
+  GIT_PROMPT_END_USER="${BoldWhite} # ${ResetColor}"
+  GIT_PROMPT_END_ROOT="${BoldRed} # ${ResetColor}"
+
+}
+
+reload_git_prompt_colors "Single_line_Ubuntu_Romain"

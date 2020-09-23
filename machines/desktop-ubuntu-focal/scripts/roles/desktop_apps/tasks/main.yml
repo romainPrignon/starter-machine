@@ -1,0 +1,46 @@
+---
+- name: install desktop apps
+  tags: desktop_apps
+  become: yes
+  apt:
+    pkg:
+      - eog
+      - evince
+      - firefox
+      - gnome-calculator
+      - gnome-paint
+      - gnome-screenshot
+      - gnome-system-log
+      - gnome-terminal
+      - gnome-tweak-tool
+      # - google-drive-ocamlfuse
+      - nautilus
+      # - nautilus-dropbox
+      - synaptic
+    state: present
+    update_cache: yes
+    autoclean: yes
+    autoremove: yes
+
+- name: fetch user desktop apps
+  tags: desktop_apps
+  get_url: url={{item}} dest=/tmp/
+  with_items:
+    - https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    - https://download.sublimetext.com/sublime-text_build-3211_amd64.deb
+    - https://update.code.visualstudio.com/1.49.1/linux-deb-x64/stable
+    - https://github.com/oguzhaninan/Stacer/releases/download/v1.1.0/stacer_1.1.0_amd64.deb
+
+- name: install user desktop apps
+  tags: desktop_apps
+  become: yes
+  apt:
+    deb: "/tmp/{{ item }}"
+    update_cache: yes
+    autoclean: yes
+    autoremove: yes
+  with_items:
+    - google-chrome-stable_current_amd64.deb
+    - sublime-text_build-3211_amd64.deb
+    - code_1.49.1-1600299189_amd64.deb
+    - stacer_1.1.0_amd64.deb

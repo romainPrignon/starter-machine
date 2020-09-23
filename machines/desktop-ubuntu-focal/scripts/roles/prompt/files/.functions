@@ -1,0 +1,121 @@
+function ssh_tunnel()
+{
+    ssh docker@localtunnel-4313.westeurope.cloudapp.azure.com
+}
+
+function output()
+{
+    rm -f /tmp/$$.txt
+    "$@" > /tmp/$$.txt
+    code /tmp/$$.txt
+}
+
+function docker-rm-container()
+{
+    docker rm $(docker ps -a -q)
+}
+
+function docker-rm-image()
+{
+    IMAGE_IDS=$(docker images | grep "^<none>" | awk "{print $3}")
+
+    if [ -n "$IMAGE_IDS" ]; then
+      docker rmi $IMAGE_IDS > /dev/null 2>&1
+    fi
+}
+
+function clean-docker()
+{
+    docker rmi $(docker images -q -f dangling=true)
+    docker volume rm $(docker volume ls -qf dangling=true)
+}
+
+function webm-to-gif() {
+    ffmpeg -i $1 -pix_fmt rgb8 $2
+}
+
+function record-terminal() {
+    ttystudio --interval=150 --delay=150 --no-palette ~/Downloads/$1
+}
+
+function kill-on-port() {
+    sudo kill `sudo lsof -t -i:$1`
+}
+
+function supertouch() {
+    for f in "$@"; do mkdir -p "$(dirname "$f")"; done
+    touch "$@"
+}
+
+function git-dig {
+    git log --pretty=format:'%Cred%h%Creset - %Cgreen(%ad)%Creset - %s %C(bold blue)<%an>%Creset' --abbrev-commit --date=short -G"$1" -- $2
+}
+
+function cnine() {
+    google-chrome --app="https://ide.c9.io/romainprignon/$1"
+}
+
+function shtd {
+    shutdown +$1
+}
+
+# backup to $1 with name backup-<hostname>-<date>.tgz
+function backup() {
+    # clean
+    rm -rf $HOME/backup/apt $HOME/backup/dconf.settings
+    mkdir -p $HOME/backup/home
+
+    # backup packages
+    dpkg --get-selections > $HOME/backup/apt
+
+    # Prepare backup
+    date=$(date +%F)
+    hostname=$(hostname -s)
+    archive_filename="backup-$hostname-$date.tgz"
+    if [ -z "$1" ]; then
+        dest="/home/romainprignon/backup/home"
+    else
+        dest=$1
+    fi
+    included_files="/home/romainprignon/app \
+                    /home/romainprignon/.aws \
+                    /home/romainprignon/.azure \
+                    /home/romainprignon/bin \
+                    /home/romainprignon/.config \
+                    /home/romainprignon/backup \
+                    /home/romainprignon/Documents \
+                    /home/romainprignon/keys \
+                    /home/romainprignon/Music \
+                    /home/romainprignon/Pictures \
+                    /home/romainprignon/Videos \
+                    /home/romainprignon/.ssh \
+                    /home/romainprignon/.local/share/gnome-shell/extensions \
+                    /etc/apt/sources.list.d"
+    excluded_files="--exclude /home/romainprignon/backup/home \
+                    --exclude /home/romainprignon/.config/google-chrome"
+
+    # backup
+    dconf dump / > $HOME/backup/dconf.settings
+    sudo tar $excluded_files -cpzf $dest/$archive_filename $included_files
+}
+
+# restore from $1 to $2
+function restore() {
+    if [ -z "$2" ]; then
+        dest="/"
+    else
+        dest=$2
+    fi
+
+    sudo tar -xvpzf $1 -C $dest --numeric-owner
+
+    # restore: dconf
+    dconf load / < $HOME/backup/dconf.settings
+
+    # restore: home
+    sudo apt update
+    sudo apt install dselect
+    sudo dselect update
+    sudo dpkg --set-selections < $HOME/backup/apt
+    sudo apt-get -u dselect-upgrade
+}

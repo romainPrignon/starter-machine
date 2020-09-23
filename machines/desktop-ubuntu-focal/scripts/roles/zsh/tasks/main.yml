@@ -1,0 +1,80 @@
+---
+- name: create .zsh dir
+  tags: zsh
+  file:
+    path: "{{ ansible_env.HOME }}/.zsh"
+    state: directory
+
+- name: install zsh deps
+  tags: zsh
+  become: yes
+  apt:
+    pkg:
+      - git
+    state: present
+    update_cache: yes
+    autoclean: yes
+    autoremove: yes
+
+- name: install zsh
+  tags: zsh
+  become: yes
+  apt:
+    pkg:
+      - zsh
+    state: present
+    update_cache: yes
+    autoclean: yes
+    autoremove: yes
+
+- name: install zsh plugins zsh-autosuggestions
+  tags: zsh
+  git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions.git
+    dest: "{{ ansible_env.HOME }}/.zsh/zsh-autosuggestions"
+
+- name: install zsh plugins zsh-syntax-highlighting
+  tags: zsh
+  git:
+    repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+    dest: "{{ ansible_env.HOME }}/.zsh/zsh-syntax-highlighting"
+
+- name: install zsh plugins zsh-git-prompt
+  tags: zsh
+  git:
+    repo: https://github.com/olivierverdier/zsh-git-prompt.git
+    dest: "{{ ansible_env.HOME }}/.zsh/zsh-git-prompt"
+
+- name: install zsh plugins zsh-history-substring-search
+  tags: zsh
+  git:
+    repo: https://github.com/zsh-users/zsh-history-substring-search.git
+    dest: "{{ ansible_env.HOME }}/.zsh/zsh-history-substring-search"
+
+- name: copy .zprofile
+  tags: zsh
+  copy:
+    src: .zprofile
+    dest: "{{ ansible_env.HOME }}/.zprofile"
+    mode: '0644'
+
+- name: copy .zshrc
+  tags: zsh
+  copy:
+    src: .zshrc
+    dest: "{{ ansible_env.HOME }}/.zshrc"
+    mode: '0644'
+
+- name: copy gitstatus.py
+  tags: zsh
+  copy:
+    src: gitstatus.py
+    dest: "{{ ansible_env.HOME }}/.zsh/zsh-git-prompt/gitstatus.py"
+    mode: '0644'
+
+- name: copy zsh-git-prompt.sh
+  tags: zsh
+  copy:
+    src: zsh-git-prompt.sh
+    dest: "{{ ansible_env.HOME }}/.zsh/zsh-git-prompt/zshrc.sh"
+    mode: '0644'

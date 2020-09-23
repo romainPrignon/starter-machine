@@ -1,0 +1,35 @@
+---
+- name: install python deps
+  tags: python
+  become: yes
+  apt:
+    pkg:
+      - curl
+      - zlib1g-dev
+      - libffi-dev
+      - libbz2-dev
+      - libreadline-dev
+      - libssl-dev
+      - libsqlite3-dev
+    state: present
+    update_cache: yes
+    autoclean: yes
+    autoremove: yes
+
+- name: install python
+  tags: python
+  shell: curl -sSL https://pyenv.run | bash
+  args:
+    executable: /bin/bash
+    creates: "{{ ansible_env.HOME }}/.pyenv/bin/pyenv" # run if file not exist
+
+- name: install pip
+  tags: python
+  become: yes
+  apt:
+    pkg:
+      - python3-pip
+    state: present
+    update_cache: yes
+    autoclean: yes
+    autoremove: yes

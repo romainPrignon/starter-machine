@@ -1,0 +1,1 @@
+sudo dd if=releases/${machine}/${machine}.img of=/dev/sdX

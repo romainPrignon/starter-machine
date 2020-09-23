@@ -1,0 +1,30 @@
+{
+  "builders": [
+    {
+      "type": "docker",
+      "image": "romainprignon/desktop/ubuntu/focal:template",
+      "pull": false,
+      "commit": true
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "ansible",
+      "user": "romainprignon",
+      "extra_arguments": [
+        "--extra-vars",
+        "ansible_sudo_pass={{user `sudo_password`}}"
+      ],
+      "playbook_file": "./machines/desktop-ubuntu-focal/scripts/main.yml"
+    }
+  ],
+  "post-processors": [
+    [
+      {
+        "type": "docker-tag",
+        "repository": "romainprignon/desktop/ubuntu/focal",
+        "tag": "latest"
+      }
+    ]
+  ]
+}
