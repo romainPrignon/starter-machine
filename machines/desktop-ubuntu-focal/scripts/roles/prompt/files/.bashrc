@@ -14,24 +14,8 @@ if [ -f "$HOME/.functions" ]; then
 fi
 
 # include partner
-if [ -f "$HOME/.m6rc" ]; then
-    . "$HOME/.m6rc"
-fi
-
-if [ -f "$HOME/.llsrc" ]; then
-    . "$HOME/.llsrc"
-fi
-
 if [ -f "$HOME/.peaksrc" ]; then
     . "$HOME/.peaksrc"
-fi
-
-if [ -f "$HOME/.bouquetrc" ]; then
-    . "$HOME/.bouquetrc"
-fi
-
-if [ -f "$HOME/.twrrc" ]; then
-    . "$HOME/.twrrc"
 fi
 
 #######################################
@@ -133,15 +117,16 @@ if [ -z "$SSH_AUTH_SOCK" ] ; then
   ssh-add
 fi
 
-# n
-export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
-
 # fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # pyenv
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+if [ -x "$(command -v pyenv)" ]; then
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+fi
 
 # php
-eval "$(symfony-autocomplete)"
+if [ -x "$(command -v symfony-autocomplete)" ]; then
+  eval "$(symfony-autocomplete)"
+fi

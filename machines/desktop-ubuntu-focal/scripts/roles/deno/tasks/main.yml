@@ -20,7 +20,7 @@
 - name: install autocompletion
   tags: deno
   become: yes
-  shell: deno completions bash > /etc/bash_completion.d/deno
+  shell: "{{ ansible_env.HOME }}/.deno/bin/deno completions bash > /etc/bash_completion.d/deno"
   args:
     executable: /bin/bash
     creates: /etc/bash_completion.d/deno # run if file not exist

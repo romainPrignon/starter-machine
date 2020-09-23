@@ -42,7 +42,9 @@ will put it into releases folder with a readme containing instruction
     - hostname
 - ecrire les scripts et les tester (ansible) 
     ✔ node
-    - git <--------
+    ✔ git 
+    - remove executable <--------
+    - exports correct path
     - change user password ou alors ne pas le mettre dans git
     - swap
     - couper sshd pour desktop, restriction a pas root pour server

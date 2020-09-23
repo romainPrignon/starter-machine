@@ -1,23 +1,13 @@
 ---
-- name: install node deps
+- name: install latest node
   tags: node
   become: yes
-  apt:
-    pkg:
-      - curl
-      - git
-      - make
-    state: present
-    update_cache: yes
-    autoclean: yes
-    autoremove: yes
+  shell: "{{ ansible_env.HOME }}/apps/n latest"
 
-- name: install node
+- name: install lts node
   tags: node
-  shell: curl -sSL https://git.io/n-install | bash -s -- -y lts latest
-  args:
-    executable: /bin/bash
-    creates: "{{ ansible_env.HOME }}/n/bin/node" # run if file not exist
+  become: yes
+  shell: "{{ ansible_env.HOME }}/apps/n lts"
 
 - name: install autocompletion
   tags: node

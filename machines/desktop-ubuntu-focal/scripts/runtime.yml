@@ -3,8 +3,8 @@
   hosts: default
 
   roles:
-    # - role: docker
+    - role: docker
     - role: node
     - role: deno
-    # - role: python
+    - role: python
     - role: php

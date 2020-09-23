@@ -4,16 +4,26 @@
       "type": "docker",
       "image": "romainprignon/desktop/ubuntu/focal:template",
       "pull": false,
-      "commit": true
+      "commit": true,
+      "run_command": [
+        "-d",
+        "-i",
+        "-t",
+        "{{.Image}}",
+        "/bin/bash"
+      ]
     }
   ],
   "provisioners": [
     {
       "type": "ansible",
-      "user": "romainprignon",
+      "ansible_env_vars": [
+        "ANSIBLE_CONFIG=./machines/desktop-ubuntu-focal/scripts/ansible.cfg"
+      ],
       "extra_arguments": [
+        "-vv",
         "--extra-vars",
-        "ansible_sudo_pass={{user `sudo_password`}}"
+        "ansible_user={{user `ssh_username`}} ansible_ssh_pass={{user `ssh_password`}} ansible_sudo_pass={{user `sudo_password`}}"
       ],
       "playbook_file": "./machines/desktop-ubuntu-focal/scripts/main.yml"
     }

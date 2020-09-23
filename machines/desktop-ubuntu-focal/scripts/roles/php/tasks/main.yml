@@ -65,11 +65,11 @@
     dest: "{{ ansible_env.HOME }}/.composer/composer.json"
     mode: '0644'
 
-- name: install composer global deps
-  tags: php
-  shell: composer globall install
-  args:
-    executable: /bin/bash
+# - name: install composer global deps
+#   tags: php
+#   shell: "{{ ansible_env.HOME }}/apps/composer global install"
+#   args:
+#     executable: /bin/bash
 
 - name: install symfony
   tags: php
