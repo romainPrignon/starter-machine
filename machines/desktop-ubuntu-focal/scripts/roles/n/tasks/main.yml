@@ -3,5 +3,5 @@
   tags: n
   get_url:
     url: https://raw.githubusercontent.com/tj/n/master/bin/n
-    dest: "{{ ansible_env.HOME }}/apps/n"
+    dest: "{{ ansible_env.HOME }}/bin/n"
     mode: 'u=rx,g=rx,o=r'

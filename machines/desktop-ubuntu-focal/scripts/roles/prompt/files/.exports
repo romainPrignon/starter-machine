@@ -9,20 +9,19 @@ export HISTSIZE=999999999
 export HISTFILESIZE=$HISTSIZE
 export SAVEHIST=$HISTSIZE
 
-export COMPOSER_HOME="$HOME/.composer"
-
-
 PATH="$HOME/bin:$PATH"
 PATH="$HOME/.local/bin:$PATH"
-PATH="$HOME/.composer/vendor/bin:$PATH"
+PATH="$HOME/app:$PATH"
+PATH="$HOME/app/phpstorm/bin:$PATH"
 PATH="$HOME/n/bin:$PATH"
 PATH="$HOME/.deno/bin:$PATH"
-PATH="$HOME/.cargo/bin:$PATH"
 PATH="$HOME/.pyenv/bin:$PATH"
-PATH="$HOME/apps:$PATH"
-PATH="$HOME/apps/phpstorm/bin:$PATH"
+PATH="$HOME/.cargo/bin:$PATH"
 PATH="$HOME/.symfony/bin:$PATH"
 PATH="$HOME/.pulumi/bin:$PATH"
+PATH="$HOME/.composer/vendor/bin:$PATH"
+
+export COMPOSER_HOME="$HOME/.composer"
 
 # proxy
 #export http_proxy=http://some.host:8080

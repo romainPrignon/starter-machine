@@ -4,5 +4,6 @@
 
   roles:
     - role: desktop
-    - role: fonts
     - role: desktop_apps
+    - role: vscode
+    - role: subl

@@ -90,20 +90,30 @@ bindkey '^Z' backward-kill-word
 bindkey -s '^m' '^l^j'
 
 # 2 => `
-xmodmap -e "keycode 49 = grave"
+if [ -x "$(command -v xmodmap)" ]; then
+  xmodmap -e "keycode 49 = grave"
+fi
+
 # caps_lock => <>
-xmodmap -e "keycode 66 = less greater"
+if [ -x "$(command -v xmodmap)" ]; then
+  xmodmap -e "keycode 66 = less greater"
+fi
 
 # external
-
-## n
-export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"
 
 ## fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+## pyenv
+if [ -x "$(command -v pyenv)" ]; then
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+fi
+
 ## php
-eval "$(symfony-autocomplete)"
+if [ -x "$(command -v symfony-autocomplete)" ]; then
+  eval "$(symfony-autocomplete)"
+fi
 
 # must be at the end
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

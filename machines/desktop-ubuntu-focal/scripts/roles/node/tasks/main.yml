@@ -2,12 +2,12 @@
 - name: install latest node
   tags: node
   become: yes
-  shell: "{{ ansible_env.HOME }}/apps/n latest"
+  shell: "{{ ansible_env.HOME }}/bin/n latest"
 
 - name: install lts node
   tags: node
   become: yes
-  shell: "{{ ansible_env.HOME }}/apps/n lts"
+  shell: "{{ ansible_env.HOME }}/bin/n lts"
 
 - name: install autocompletion
   tags: node

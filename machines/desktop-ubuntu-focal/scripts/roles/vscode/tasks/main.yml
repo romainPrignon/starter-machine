@@ -1,0 +1,53 @@
+---
+- name: create vscode config dir
+  tags: vscode
+  file:
+    path: "{{ ansible_env.HOME }}/.config/Code/User"
+    state: directory
+
+- name: fetch vscode app
+  tags: vscode
+  get_url: url=https://update.code.visualstudio.com/1.49.1/linux-deb-x64/stable dest=/tmp/
+
+- name: install vscode app
+  tags: vscode
+  become: yes
+  apt:
+    deb: /tmp/code_1.49.1-1600299189_amd64.deb
+    update_cache: yes
+    autoclean: yes
+    autoremove: yes
+
+# - name: install vscode extension
+#   tags: vscode
+#   shell: "code --install-extension {{ item }}"
+#   with_items:
+#     - ms-vscode.vscode-typescript-tslint-plugin
+#     - EditorConfig.EditorConfig
+#     - PeterJausovec.vscode-docker
+#     - christian-kohler.path-intellisense
+#     - dbaeumer.vscode-eslint
+#     - devtanc.tab-hero
+#     - eg2.vscode-npm-script
+#     - felixfbecker.php-debug
+#     - felixfbecker.php-intellisense
+#     - formulahendry.auto-close-tag
+#     - geddski.macros
+#     - ikappas.phpcs
+#     - mikestead.dotenv
+#     - ms-vscode.typescript-javascript-grammar
+#     - msjsdiag.debugger-for-chrome
+#     - PKief.material-icon-theme
+#     - whatwedo.twig
+#     - yatki.vscode-surround
+#     - eamodio.gitlens
+
+- name: copy vscode config
+  tags: vscode
+  copy:
+    src: "{{ item }}"
+    dest: "{{ ansible_env.HOME }}/.config/Code/User/{{ item }}"
+    mode: '0644'
+  with_items:
+    - settings.json
+    - keybindings.json

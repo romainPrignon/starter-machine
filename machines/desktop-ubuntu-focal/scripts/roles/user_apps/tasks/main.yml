@@ -1,7 +1,14 @@
 ---
-- name: create apps dir
+- name: create app dir
+  tags: user_apps
   file:
-    path: "{{ ansible_env.HOME }}/apps"
+    path: "{{ ansible_env.HOME }}/app"
+    state: directory
+
+- name: create bin dir
+  tags: user_apps
+  file:
+    path: "{{ ansible_env.HOME }}/bin"
     state: directory
 
 - name: install user apps

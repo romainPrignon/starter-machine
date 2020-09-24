@@ -14,6 +14,23 @@
     autoclean: yes
     autoremove: yes
 
+- name: install fonts
+  tags: fonts
+  become: yes
+  apt:
+    pkg:
+      - font-manager
+      - fonts-droid-fallback
+      - fonts-inconsolata
+      - fonts-liberation
+      - ttf-dejavu
+      - ttf-ancient-fonts
+      - ttf-ubuntu-font-family
+    state: present
+    update_cache: yes
+    autoclean: yes
+    autoremove: yes
+
 - name: add theme deb
   tags: desktop
   become: yes
@@ -31,3 +48,41 @@
     update_cache: yes
     autoclean: yes
     autoremove: yes
+
+- name: copy dconf config
+  tags: desktop
+  copy:
+    src: "{{ item }}"
+    dest: "/tmp/{{ item }}"
+    mode: '0644'
+  with_items:
+    - nautilus.dconf
+    - power-manager.dconf
+    - settings-daemon.dconf
+    - shell.dconf
+    - terminal.dconf
+    - desktop.dconf
+
+- name: load explorer config
+  tags: desktop
+  shell: dbus-launch dconf load /org/gnome/nautilus/ < /tmp/nautilus.dconf
+
+- name: load power config
+  tags: desktop
+  shell: dbus-launch dconf load /org/gnome/power-manager/ < /tmp/power-manager.dconf
+
+- name: load daemon config
+  tags: desktop
+  shell: dbus-launch dconf load /org/gnome/settings-daemon/ < /tmp/settings-daemon.dconf
+
+- name: load shell config
+  tags: desktop
+  shell: dbus-launch dconf load /org/gnome/shell/ < /tmp/shell.dconf
+
+- name: load terminal config
+  tags: desktop
+  shell: dbus-launch dconf load /org/gnome/terminal/ < /tmp/terminal.dconf
+
+- name: load desktop config
+  tags: desktop
+  shell: dbus-launch dconf load /org/gnome/desktop/ < /tmp/desktop.dconf

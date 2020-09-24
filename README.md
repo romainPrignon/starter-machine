@@ -18,6 +18,9 @@ make release-metal
 will do: VBoxManage clonehd your-virtualbox-disk.vdi disk.img --format RAW
 will put it into releases folder with a readme containing instruction
 
+# FIX
+- xdebug
+- vscode extension
 
 # TODO
 ✔ faire une nomenclature: 
@@ -43,8 +46,12 @@ will put it into releases folder with a readme containing instruction
 - ecrire les scripts et les tester (ansible) 
     ✔ node
     ✔ git 
-    - remove executable <--------
-    - exports correct path
+    ✔ remove executable 
+    ✔ exports correct path apps app 
+    ✔ use bin
+    ✔ configure gui... 
+    - verifier que tout les dotfiles sont la <--------
+    - clean functions.sh (rename things...)
     - change user password ou alors ne pas le mettre dans git
     - swap
     - couper sshd pour desktop, restriction a pas root pour server
@@ -65,12 +72,14 @@ will put it into releases folder with a readme containing instruction
         /etc/rc.local
         faire un tour de /usr
         les pkg npm global
+    - gestion des local, keyboard,.. au runtime
 ✔ choisir comment couper les playbook (on coupe le main playbook par use case, et non pas 1 seul playbook et des roles, les roles c'est une unité logique)
     ✔ install, confure, update ? => partir pluto sur un seul playbook et ce sera immutable
 ✔ l'image template doit contenir python et faire un dockerfile python ? ubuntu-desktop container
 - faire l'image du server et donc des roles commun
 - faire en sorte que l'user romainprignon ou celui du server soit créer au moment du provisionning comme cela c'est générique pour de vrai
     - les credential ne doivent pas etre versionner
+- pouvoir provisionner localement
 - install packer as dependencies (make setup) ansibl galaxy,...
 - add quality (packer lint, ansible lint,yaml lint, test image, diff iamge,...)
 - do  release-metal command properly

@@ -1,13 +1,8 @@
-function ssh_tunnel()
-{
-    ssh docker@localtunnel-4313.westeurope.cloudapp.azure.com
-}
-
-function output()
+function output() # TODO rename
 {
     rm -f /tmp/$$.txt
     "$@" > /tmp/$$.txt
-    code /tmp/$$.txt
+    subl /tmp/$$.txt
 }
 
 function docker-rm-container()
@@ -45,14 +40,6 @@ function kill-on-port() {
 function supertouch() {
     for f in "$@"; do mkdir -p "$(dirname "$f")"; done
     touch "$@"
-}
-
-function git-dig {
-    git log --pretty=format:'%Cred%h%Creset - %Cgreen(%ad)%Creset - %s %C(bold blue)<%an>%Creset' --abbrev-commit --date=short -G"$1" -- $2
-}
-
-function cnine() {
-    google-chrome --app="https://ide.c9.io/romainprignon/$1"
 }
 
 function shtd {

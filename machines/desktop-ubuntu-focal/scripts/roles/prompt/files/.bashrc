@@ -1,3 +1,4 @@
+# If not running interactively, don't do anything
 case $- in
     *i*) ;;
       *) return;;
@@ -89,9 +90,14 @@ bind "\C-k:kill-whole-line"
 bind '"\C-m": "\C-l\C-j"'
 
 # 2 => `
-xmodmap -e "keycode 49 = grave"
+if [ -x "$(command -v xmodmap)" ]; then
+  xmodmap -e "keycode 49 = grave"
+fi
+
 # caps_lock => <>
-xmodmap -e "keycode 66 = less greater"
+if [ -x "$(command -v xmodmap)" ]; then
+  xmodmap -e "keycode 66 = less greater"
+fi
 
 #######################################
 

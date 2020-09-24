@@ -42,7 +42,7 @@
 
 - name: install composer
   vars:
-    composer_path: "{{ ansible_env.HOME }}/apps/composer"
+    composer_path: "{{ ansible_env.HOME }}/bin/composer"
   include_role:
     name: geerlingguy.composer
     apply:
@@ -67,7 +67,7 @@
 
 # - name: install composer global deps
 #   tags: php
-#   shell: "{{ ansible_env.HOME }}/apps/composer global install"
+#   shell: "{{ ansible_env.HOME }}/bin/composer global install"
 
 - name: install symfony
   tags: php
