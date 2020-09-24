@@ -14,7 +14,6 @@
   become: yes
   shell:  npm completion > /etc/bash_completion.d/npm
   args:
-    executable: /bin/bash
     creates: /etc/bash_completion.d/npm # run if file not exist
 
 - name: copy npm config

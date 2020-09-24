@@ -68,12 +68,9 @@
 # - name: install composer global deps
 #   tags: php
 #   shell: "{{ ansible_env.HOME }}/apps/composer global install"
-#   args:
-#     executable: /bin/bash
 
 - name: install symfony
   tags: php
   shell: wget https://get.symfony.com/cli/installer -O - | bash
   args:
-    executable: /bin/bash
     creates: "{{ ansible_env.HOME }}/.symfony/bin/symfony" # run if file not exist

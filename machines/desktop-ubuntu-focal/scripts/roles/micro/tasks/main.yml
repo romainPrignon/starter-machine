@@ -20,7 +20,6 @@
   tags: micro
   shell: curl -sSL https://getmic.ro | bash
   args:
-    executable: /bin/bash
     chdir: "{{ ansible_env.HOME }}/apps"
     creates: "{{ ansible_env.HOME }}/apps/micro" # run if file not exist
 

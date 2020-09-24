@@ -17,15 +17,12 @@
   become: yes
   shell: curl -sSL https://get.docker.com | bash
   args:
-    executable: /bin/bash
     creates: /usr/bin/docker # run if file not exist
 
 - name: add user to docker group
   tags: docker
   become: yes
   shell: usermod -aG docker $(whoami) # whoami = romainprignon
-  args:
-    executable: /bin/bash
 
 - name: install docker-compose
   tags: docker-compose

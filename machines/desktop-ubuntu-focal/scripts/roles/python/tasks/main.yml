@@ -20,7 +20,6 @@
   tags: python
   shell: curl -sSL https://pyenv.run | bash
   args:
-    executable: /bin/bash
     creates: "{{ ansible_env.HOME }}/.pyenv/bin/pyenv" # run if file not exist
 
 - name: install pip
