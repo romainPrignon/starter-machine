@@ -5,12 +5,14 @@
   apt:
     pkg:
       - apt-transport-https
+      - apt-utils
       - build-essential
       - ca-certificates
       - dkms
       - gcc
       - language-pack-en-base
       - linux-headers-generic # virtual on vpc
+      - locales
       - python-pygments
       - python3-software-properties
       - software-properties-common

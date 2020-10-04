@@ -90,12 +90,12 @@ bind "\C-k:kill-whole-line"
 bind '"\C-m": "\C-l\C-j"'
 
 # 2 => `
-if [ -x "$(command -v xmodmap)" ]; then
+if [[ $DISPLAY ]]; then
   xmodmap -e "keycode 49 = grave"
 fi
 
 # caps_lock => <>
-if [ -x "$(command -v xmodmap)" ]; then
+if [[ $DISPLAY ]]; then
   xmodmap -e "keycode 66 = less greater"
 fi
 

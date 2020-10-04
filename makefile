@@ -4,6 +4,7 @@
 builder?=packer
 
 install: # boostrap dev environment ex: make install
+	ansible-galaxy collection install community.general
 	ansible-galaxy install geerlingguy.php-versions geerlingguy.php geerlingguy.composer geerlingguy.php-xdebug
 	# curl packer
 	# curl virtualbox

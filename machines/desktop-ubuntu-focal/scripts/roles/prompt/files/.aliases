@@ -12,7 +12,8 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
 # Shortcuts
-alias d="cd ~/Documents"
+alias app="cd ~/a"
+alias bin="cd ~/bin"
 alias dl="cd ~/Downloads"
 alias w="cd ~/workspace"
 
@@ -33,7 +34,9 @@ alias meteo="curl -4 wttr.in/Lyon"
 alias dog="pygmentize -g"
 alias mp3="ydl -x --audio-format mp3 --audio-quality 0"
 alias mp4="ydl -f 22"
-alias sandbox="docker run -it --rm -v /home/romainprignon/sandbox:/home/romainprignon/sandbox romainprignon/desktop/ubuntu/focal:latest"
+alias sandbox-focal-generic="docker run -it --rm -v /home/romainprignon/workspace/romainprignon/dotfiles:/root ubuntu:20.04"
+alias sandbox-focal-init="docker run -it --rm -v /home/romainprignon/workspace/romainprignon/dotfiles:/home/romainprignon/workspace/romainprignon/dotfiles romainprignon/desktop/ubuntu/focal:template"
+alias sandbox-focal-latest="docker run -it --rm -v /home/romainprignon/workspace/romainprignon/dotfiles:/home/romainprignon/workspace/romainprignon/dotfiles romainprignon/desktop/ubuntu/focal:latest"
 
 # git
 alias git-clean="git remote prune origin && git branch -vv | grep ' gone' | cut -d' ' -f1-3 | xargs -i git branch -D {}"

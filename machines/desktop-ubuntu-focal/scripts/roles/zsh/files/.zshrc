@@ -90,12 +90,12 @@ bindkey '^Z' backward-kill-word
 bindkey -s '^m' '^l^j'
 
 # 2 => `
-if [ -x "$(command -v xmodmap)" ]; then
+if [[ $DISPLAY ]]; then
   xmodmap -e "keycode 49 = grave"
 fi
 
 # caps_lock => <>
-if [ -x "$(command -v xmodmap)" ]; then
+if [[ $DISPLAY ]]; then
   xmodmap -e "keycode 66 = less greater"
 fi
 

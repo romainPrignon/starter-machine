@@ -18,7 +18,6 @@
     pkg:
       - curl
       - ffmpeg
-      - fzf
       - git-extras
       - htop
       - openssl
@@ -28,6 +27,7 @@
       - unzip
       - wget
       - wmctrl
+      - xclip
     state: present
     update_cache: yes
     autoclean: yes

@@ -9,3 +9,4 @@
     - role: git # when there is config
     - role: vim # when there is config
     - role: n # when there is config
+    - role: fzf # when there is config

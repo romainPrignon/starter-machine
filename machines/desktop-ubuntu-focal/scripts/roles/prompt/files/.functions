@@ -1,30 +1,3 @@
-function output() # TODO rename
-{
-    rm -f /tmp/$$.txt
-    "$@" > /tmp/$$.txt
-    subl /tmp/$$.txt
-}
-
-function docker-rm-container()
-{
-    docker rm $(docker ps -a -q)
-}
-
-function docker-rm-image()
-{
-    IMAGE_IDS=$(docker images | grep "^<none>" | awk "{print $3}")
-
-    if [ -n "$IMAGE_IDS" ]; then
-      docker rmi $IMAGE_IDS > /dev/null 2>&1
-    fi
-}
-
-function clean-docker()
-{
-    docker rmi $(docker images -q -f dangling=true)
-    docker volume rm $(docker volume ls -qf dangling=true)
-}
-
 function webm-to-gif() {
     ffmpeg -i $1 -pix_fmt rgb8 $2
 }
@@ -33,7 +6,7 @@ function record-terminal() {
     ttystudio --interval=150 --delay=150 --no-palette ~/Downloads/$1
 }
 
-function kill-on-port() {
+function superkill() {
     sudo kill `sudo lsof -t -i:$1`
 }
 

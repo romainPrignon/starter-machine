@@ -4,6 +4,8 @@
 
   roles:
     - role: desktop
+    - role: gtk
     - role: desktop_apps
+    - role: desktop_scripts
     - role: vscode
     - role: subl

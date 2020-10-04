@@ -18,14 +18,16 @@ visible-name='Default'
 palette=['rgb(0,0,0)', 'rgb(204,0,0)', 'rgb(78,154,6)', 'rgb(196,160,0)', 'rgb(52,101,164)', 'rgb(117,80,123)', 'rgb(6,152,154)', 'rgb(211,215,207)', 'rgb(85,87,83)', 'rgb(239,41,41)', 'rgb(138,226,52)', 'rgb(252,233,79)', 'rgb(114,159,207)', 'rgb(173,127,168)', 'rgb(52,226,226)', 'rgb(238,238,236)']
 default-size-columns=160
 default-size-rows=45
-cursor-shape='block'
+cursor-shape='ibeam'
 use-system-font=true
+highlight-colors-set=true
 use-theme-colors=false
-use-theme-transparency=false
 font='Monospace 12'
+use-theme-transparency=false
 highlight-background-color='rgb(68,68,68)'
 background-color='rgb(35,39,41)'
 highlight-foreground-color='rgb(237,237,237)'
+bold-is-bright=true
 
 [legacy/profiles:/:10e5ebb8-38f2-465e-98c6-d22ea5f9f87c]
 visible-name='Dark'
@@ -36,8 +38,10 @@ cursor-shape='ibeam'
 use-system-font=true
 use-theme-transparency=false
 font='Monospace 12'
+bold-is-bright=true
 
 [legacy/profiles:/:67d81f71-9e92-449e-a3f2-703d59856bb6]
+foreground-color='rgb(77,77,77)'
 visible-name='Light'
 palette=['rgb(0,0,0)', 'rgb(204,0,0)', 'rgb(78,154,6)', 'rgb(196,160,0)', 'rgb(52,101,164)', 'rgb(117,80,123)', 'rgb(6,152,154)', 'rgb(101,123,131)', 'rgb(85,87,83)', 'rgb(239,41,41)', 'rgb(88,110,117)', 'rgb(183,33,129)', 'rgb(114,159,207)', 'rgb(173,127,168)', 'rgb(39,106,126)', 'rgb(88,110,117)']
 default-size-columns=160
@@ -48,10 +52,10 @@ use-theme-colors=false
 font='Monospace 12'
 use-theme-transparency=false
 bold-color-same-as-fg=false
-foreground-color='#4d4d4d4d4d4d'
-bold-color='#272728282222'
-background-color='#f7f7f7f7e7e7'
+bold-color='#58586e6e7575'
+background-color='#fdfdf6f6e3e3'
 
 [legacy]
 schema-version=uint32 3
 default-show-menubar=false
+headerbar=false

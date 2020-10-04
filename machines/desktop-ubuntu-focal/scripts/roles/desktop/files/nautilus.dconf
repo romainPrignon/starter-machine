@@ -1,5 +1,7 @@
 [preferences]
+search-view='list-view'
 default-folder-viewer='list-view'
+search-filter-time-type='last_modified'
 sort-directories-first=true
 default-sort-order='type'
 
@@ -9,4 +11,5 @@ maximized=true
 
 [list-view]
 default-visible-columns=['name', 'size', 'type', 'date_modified', 'owner', 'permissions']
+default-zoom-level='standard'
 default-column-order=['name', 'size', 'type', 'date_modified', 'date_accessed', 'owner', 'group', 'permissions', 'mime_type', 'where']

@@ -32,3 +32,19 @@
     update_cache: yes
     autoclean: yes
     autoremove: yes
+
+- name: configure python alternative
+  tags: python
+  become: yes
+  community.general.alternatives:
+    name: python
+    link: /usr/bin/python
+    path: /usr/bin/python3
+
+- name: configure pip alternative
+  tags: python
+  become: yes
+  community.general.alternatives:
+    name: python
+    link: /usr/bin/pip
+    path: /usr/bin/pip3

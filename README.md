@@ -38,40 +38,44 @@ will put it into releases folder with a readme containing instruction
 ✔ revoir l'arbo pour faire en fonction du template et un dossier commun
 ✔ faire une commande pour tester le script dans du docker car plus rapide que de passer par packer
 ✔ mettre un .editorconfig
-- scrpt de base (soit cest manuel, soit cest dans docker) ATTENTION CA PEUT AUSSI ETRE DU RUNTIME <--------
+- scrpt de base (soit cest manuel, soit cest dans docker) ATTENTION CA PEUT AUSSI ETRE DU RUNTIME 
     - keyboard /etc/keyboard
     - ntp configure timedatectl
     - locale
     - hostname
 - ecrire les scripts et les tester (ansible) 
     ✔ node
-    ✔ git 
     ✔ remove executable 
     ✔ exports correct path apps app 
     ✔ use bin
     ✔ configure gui... 
-    - verifier que tout les dotfiles sont la <--------
-    - clean functions.sh (rename things...)
-    - change user password ou alors ne pas le mettre dans git
-    - swap
-    - couper sshd pour desktop, restriction a pas root pour server
-    - regle de firewall
-    - tout le reste...
-        /etc/ssh/ssh_config
-        /etc/hostname 
-        /etc/hosts
-        /etc/apt/sources.list
-        /etc/apt/sources.list.d/
-        /etc/fstab 
-        /etc/timezone 
-        /etc/resolv.conf
-        /etc/localtime
-        /etc/sysctl.conf
-        /etc/modprobe.d/blacklist.conf
-        /etc/bluetooth/main.conf
-        /etc/rc.local
+    - verifier que tout ansible fonctionne 
+        ✔ fzf 
+        ✔ python alternative
+        ✔ pip alternative
+    ✔ installer une vm avec les scripts courant (doit marcher nickel !) apres on transpose a ansible
+    ✔ clean functions.sh (rename things...)
+    - tout le reste... <--------
+        - setup tlp
+        - ansible
+        - datagrip
+        - devdoc
+        - dns 1.1.1.1 pour certain connection
+        - setup swap (/etc/fstab and /etc/sysctl.conf)
+        - /etc/ssh/ssh_config (serveur)
+        - /etc/hostname (runtime ?)
+        - /etc/timezone (runtime ?)
+        
+        
+        - /etc/modprobe.d/blacklist.conf ??
+        - /etc/bluetooth/main.conf (ca na jamais marcher)
+        - keyboard: remove caps (/usr/share/X11/xkb/symbols/pc)
         faire un tour de /usr
         les pkg npm global
+    - change user password ou alors ne pas le mettre dans git
+    - couper sshd pour desktop, restriction a pas root pour server
+    - regle de firewall
+    - swap
     - gestion des local, keyboard,.. au runtime
 ✔ choisir comment couper les playbook (on coupe le main playbook par use case, et non pas 1 seul playbook et des roles, les roles c'est une unité logique)
     ✔ install, confure, update ? => partir pluto sur un seul playbook et ce sera immutable

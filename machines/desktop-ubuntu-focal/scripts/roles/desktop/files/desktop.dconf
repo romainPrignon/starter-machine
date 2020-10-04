@@ -1,26 +1,25 @@
 [interface]
-clock-show-date=true
 font-name='Ubuntu 11'
 gtk-im-module='gtk-im-context-simple'
-enable-animations=false
-icon-theme='Vibrancy-Colors'
-monospace-font-name='Ubuntu Mono 13'
+show-battery-percentage=true
+cursor-theme='DMZ-White'
 toolkit-accessibility=false
+icon-theme='ubuntu-mono-dark'
+monospace-font-name='Ubuntu Mono 13'
+enable-animations=false
+gtk-theme='Adwaita-dark'
+clock-show-date=true
 
 [notifications]
-application-children=['org-gnome-nautilus', 'gnome-network-panel', 'jetbrains-toolbox']
-
-[notifications/application/jetbrains-toolbox]
-application-id='jetbrains-toolbox.desktop'
-
-[notifications/application/gnome-network-panel]
-application-id='gnome-network-panel.desktop'
+application-children=['org-gnome-nautilus']
 
 [notifications/application/org-gnome-nautilus]
 application-id='org.gnome.Nautilus.desktop'
 
+
+
 [screensaver]
-picture-uri='file:///usr/share/backgrounds/gnome/Whispy_Tails.jpg'
+picture-uri='file:///home/romainprignon/Dropbox/picture/wallpaper/screensaver.jpg'
 lock-delay=uint32 300
 picture-options='zoom'
 
@@ -30,6 +29,7 @@ tap-to-click=true
 
 [peripherals/mouse]
 speed=0.0
+left-handed=false
 
 [search-providers]
 sort-order=['gnome-contacts.desktop', 'gnome-documents.desktop', 'nautilus.desktop']
@@ -59,11 +59,12 @@ switch-to-workspace-up=@as []
 automatic-timezone=true
 
 [background]
-picture-uri='file:///home/romainprignon/Pictures/Wallpapers/01.jpg'
+picture-uri='file:///home/romainprignon/Dropbox/picture/wallpaper/background.jpg'
+show-desktop-icons=false
 color-shading-type='solid'
-primary-color='#000000'
+primary-color='#333333'
 picture-options='zoom'
-secondary-color='#000000'
+secondary-color='#333333'
 
 [input-sources]
 sources=[('xkb', 'fr'), ('xkb', 'us')]
