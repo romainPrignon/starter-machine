@@ -10,7 +10,7 @@
   copy:
     src: "{{ item }}"
     dest: "{{ ansible_env.HOME }}/scripts/{{ item }}"
-    mode: '0644'
+    mode: '0744'
   with_items:
     - focus-terminal.sh
     - git-standup.sh

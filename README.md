@@ -55,18 +55,16 @@ will put it into releases folder with a readme containing instruction
         ✔ pip alternative
     ✔ installer une vm avec les scripts courant (doit marcher nickel !) apres on transpose a ansible
     ✔ clean functions.sh (rename things...)
-    - tout le reste... <--------
-        - setup tlp
-        - ansible
-        - datagrip
-        - devdoc
-        - dns 1.1.1.1 pour certain connection
+    - tout le reste... 
+        ✔ devdoc (dotfiles OK, ansible NOK)
+        - setup tlp (dotfiles OK, ansible NOK)
+        - ansible (dotfiles OK, ansible NOK)
+        - jetbrain toolbox (dotfiles OK, ansible NOK)
+        - dns 1.1.1.1 pour certain connection (resolvconf) <--------
         - setup swap (/etc/fstab and /etc/sysctl.conf)
         - /etc/ssh/ssh_config (serveur)
         - /etc/hostname (runtime ?)
         - /etc/timezone (runtime ?)
-        
-        
         - /etc/modprobe.d/blacklist.conf ??
         - /etc/bluetooth/main.conf (ca na jamais marcher)
         - keyboard: remove caps (/usr/share/X11/xkb/symbols/pc)
@@ -77,6 +75,7 @@ will put it into releases folder with a readme containing instruction
     - regle de firewall
     - swap
     - gestion des local, keyboard,.. au runtime
+    - faire un readme ici aussi
 ✔ choisir comment couper les playbook (on coupe le main playbook par use case, et non pas 1 seul playbook et des roles, les roles c'est une unité logique)
     ✔ install, confure, update ? => partir pluto sur un seul playbook et ce sera immutable
 ✔ l'image template doit contenir python et faire un dockerfile python ? ubuntu-desktop container
