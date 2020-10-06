@@ -56,17 +56,17 @@ will put it into releases folder with a readme containing instruction
     ✔ installer une vm avec les scripts courant (doit marcher nickel !) apres on transpose a ansible
     ✔ clean functions.sh (rename things...)
     - tout le reste... 
-        ✔ devdoc (dotfiles OK, ansible NOK)
+        ✔ devdoc (dotfiles OK, ansible NOK) <--------
         - setup tlp (dotfiles OK, ansible NOK)
         - ansible (dotfiles OK, ansible NOK)
         - jetbrain toolbox (dotfiles OK, ansible NOK)
-        - dns 1.1.1.1 pour certain connection (resolvconf) <--------
-        - setup swap (/etc/fstab and /etc/sysctl.conf)
-        - /etc/ssh/ssh_config (serveur)
-        - /etc/hostname (runtime ?)
-        - /etc/timezone (runtime ?)
-        - /etc/modprobe.d/blacklist.conf ??
-        - /etc/bluetooth/main.conf (ca na jamais marcher)
+        - dns 1.1.1.1 pour certain connection (resolvconf) (dotfiles OK, ansible NOK)
+        - setup swap (/etc/fstab and /etc/sysctl.conf) (dotfiles OK, ansible NOK)
+        ✘ /etc/ssh/ssh_config (serveur)
+        ✘ /etc/hostname (runtime ?)
+        ✘ /etc/timezone (runtime ?)
+        ✘ /etc/modprobe.d/blacklist.conf ??
+        ✘ /etc/bluetooth/main.conf (ca na jamais marcher)
         - keyboard: remove caps (/usr/share/X11/xkb/symbols/pc)
         faire un tour de /usr
         les pkg npm global
