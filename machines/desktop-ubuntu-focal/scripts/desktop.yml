@@ -9,3 +9,4 @@
     - role: desktop_scripts
     - role: vscode
     - role: subl
+    - role: jetbrain

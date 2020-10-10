@@ -17,6 +17,7 @@
       - nautilus
       - nautilus-dropbox
       - synaptic
+      - tlp
     state: present
     update_cache: yes
     autoclean: yes

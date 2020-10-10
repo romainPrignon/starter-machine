@@ -1,0 +1,17 @@
+---
+- name: install multipass deps
+  tags: multipass
+  become: yes
+  apt:
+    pkg:
+      - snapd
+    state: present
+    update_cache: yes
+    autoclean: yes
+    autoremove: yes
+
+- name: install multipass
+  tags: multipass
+  community.general.snap:
+    name:
+      - multipass

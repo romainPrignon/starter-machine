@@ -1,0 +1,7 @@
+---
+- name: copy README.md
+  tags: doc
+  copy:
+    src: README.md
+    dest: "{{ ansible_env.HOME }}/README.md"
+    mode: '0644'

@@ -1,0 +1,23 @@
+---
+- name: download packer
+  tags: packer
+  get_url:
+    url: https://releases.hashicorp.com/packer/1.6.4/packer_1.6.4_linux_amd64.zip
+    dest: /tmp/packer.zip
+
+- name: Extract packer
+  tags: packer
+  unarchive:
+    src: /tmp/packer.zip
+    dest: /tmp
+    remote_src: yes
+
+- name: install packer
+  tags: packer
+  shell: "mv /tmp/packer {{ ansible_env.HOME }}/bin/packer"
+
+- name: set packer permission
+  tags: packer
+  file:
+    path: "{{ ansible_env.HOME }}/bin/packer"
+    mode: 'u=rx,g=rx,o=r'

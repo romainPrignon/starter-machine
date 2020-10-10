@@ -22,3 +22,20 @@
     src: .npmrc
     dest: "{{ ansible_env.HOME }}/.npmrc"
     mode: '0644'
+
+- name: install npm global deps
+  tags: node
+  become: yes
+  shell: >
+    npm install -g \
+      babel-cli \
+      depcheck \
+      gitmoji-cli \
+      hotel \
+      http-server \
+      now \
+      pkgcount \
+      thanks \
+      ts-node \
+      types-checker \
+      typescript

@@ -1,0 +1,21 @@
+---
+- name: download jetbrain app
+  tags: jetbrain
+  get_url: url=https://download.jetbrains.com/toolbox/jetbrains-toolbox-1.18.7455.tar.gz dest=/tmp/jetbrains-toolbox.tar.gz
+
+- name: extract jetbrain app
+  tags: jetbrain
+  unarchive:
+    src: /tmp/jetbrains-toolbox.tar.gz
+    dest: /tmp
+    remote_src: yes
+
+- name: install jetbrain app
+  tags: jetbrain
+  shell: "mv /tmp/jetbrains-toolbox-1.18.7455/jetbrains-toolbox {{ ansible_env.HOME }}/app/jetbrains-toolbox"
+
+- name: set jetbrain permission
+  tags: jetbrain
+  file:
+    path: "{{ ansible_env.HOME }}/app/jetbrains-toolbox"
+    mode: 'u=rx,g=rx,o=r'

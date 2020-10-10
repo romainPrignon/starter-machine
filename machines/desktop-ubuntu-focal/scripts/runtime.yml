@@ -2,8 +2,11 @@
 - name: runtime
   hosts: default
 
+  # - role: multipass
   roles:
+    - role: ansible
     - role: docker
+    - role: packer
     - role: node
     - role: deno
     - role: python

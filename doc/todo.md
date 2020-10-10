@@ -34,25 +34,26 @@
         ✔ pip alternative
     ✔ installer une vm avec les scripts courant (doit marcher nickel !) apres on transpose a ansible
     ✔ clean functions.sh (rename things...)
+    ✔ faire un tour de /usr
     - tout le reste... 
-        ✔ devdoc (dotfiles OK, ansible NOK) <--------
-        - setup tlp (dotfiles OK, ansible NOK)
-        - ansible (dotfiles OK, ansible NOK)
-        - jetbrain toolbox (dotfiles OK, ansible NOK)
-        - dns 1.1.1.1 pour certain connection (resolvconf) (dotfiles OK, ansible NOK)
+        - devdoc (dotfiles OK, ansible OK) 
+        - setup tlp (dotfiles OK, ansible OK) 
+        - ansible (dotfiles OK, ansible OK) 
+        - jetbrain toolbox (dotfiles OK, ansible OK) 
+        - packer (dotfiles OK, ansible OK) 
+        - multipass (dotfiles OK, ansible OK) 
+        - les pkg npm global (dotfiles OK, ansible OK) 
+        - dns 1.1.1.1 pour certain connection (resolvconf) (dotfiles OK, ansible NOK) <--------
         - setup swap (/etc/fstab and /etc/sysctl.conf) (dotfiles OK, ansible NOK)
+        - keyboard: remove caps (/usr/share/X11/xkb/symbols/pc) (dans le README)
         ✘ /etc/ssh/ssh_config (serveur)
         ✘ /etc/hostname (runtime ?)
         ✘ /etc/timezone (runtime ?)
         ✘ /etc/modprobe.d/blacklist.conf ??
         ✘ /etc/bluetooth/main.conf (ca na jamais marcher)
-        - keyboard: remove caps (/usr/share/X11/xkb/symbols/pc)
-        faire un tour de /usr
-        les pkg npm global
     - change user password ou alors ne pas le mettre dans git
     - couper sshd pour desktop, restriction a pas root pour server
     - regle de firewall
-    - swap
     - gestion des local, keyboard,.. au runtime
     - faire un readme ici aussi
 ✔ choisir comment couper les playbook (on coupe le main playbook par use case, et non pas 1 seul playbook et des roles, les roles c'est une unité logique)
