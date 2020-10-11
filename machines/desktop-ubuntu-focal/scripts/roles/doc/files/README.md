@@ -1,5 +1,14 @@
 # To Do Manually
 
+## Ntp
+- sudo timedatectl set-timezone My/Timezone
+
+
+## Hostname
+- sudo hostnamectl set-hostname MY_HOSTNAME
+- micro /etc/hosts
+
+
 ## Keyboard (if qwerty)
 - in /usr/share/X11/xkb/symbols/pc
 ```

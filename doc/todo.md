@@ -45,7 +45,7 @@
         ✔ packer (dotfiles OK, ansible OK) 
         ✘ multipass (dotfiles OK, ansible NOK) 
         ✔ les pkg npm global (dotfiles OK, ansible OK) 
-        - dns 1.1.1.1 pour certain connection (resolvconf) (dotfiles OK, ansible OK) 
+        ✔ dns 1.1.1.1 pour certain connection (resolvconf) (dotfiles OK, ansible OK)
         ✘ setup swap (/etc/fstab and /etc/sysctl.conf) (dotfiles OK, ansible OK) 
         ✔ keyboard: remove caps (/usr/share/X11/xkb/symbols/pc) (dans le README) (dotfiles OK, ansible OK) 
         ✘ /etc/ssh/ssh_config (serveur)
@@ -53,7 +53,7 @@
         ✘ /etc/timezone (runtime ?)
         ✘ /etc/modprobe.d/blacklist.conf ??
         ✘ /etc/bluetooth/main.conf (ca na jamais marcher)
-    - gestion des info au runtime: ntp, hostname (desktop_scripts)   <--------
+    ✔ gestion des info au runtime: ntp, hostname (readme)   
 - do release-metal command properly (MUST)
 - pouvoir provisionner localement (MUST)
 - install packer as dependencies (make setup) ansibl galaxy,... (SHOULD)
