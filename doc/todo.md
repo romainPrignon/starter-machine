@@ -54,7 +54,7 @@
         ✘ /etc/modprobe.d/blacklist.conf ??
         ✘ /etc/bluetooth/main.conf (ca na jamais marcher)
     ✔ gestion des info au runtime: ntp, hostname (readme)   
-- do release-metal command properly (MUST)
+✔ do release-metal command properly (MUST)
 - pouvoir provisionner localement (MUST)
 - install packer as dependencies (make setup) ansibl galaxy,... (SHOULD)
 - add quality (packer lint, ansible lint,yaml lint, test image, diff iamge,...)

@@ -4,13 +4,9 @@
 builder?=packer
 
 install: # boostrap dev environment ex: make install
+	apt install ansible
 	ansible-galaxy collection install community.general
 	ansible-galaxy install geerlingguy.swap geerlingguy.php-versions geerlingguy.php geerlingguy.composer geerlingguy.php-xdebug
-	# curl packer
-	# curl virtualbox
-	# dd ...
-	# ansible
-	# ansible galaxy
 
 lint: # lint machine build file ex: make lint machine=desktop-ubuntu-focal [builder=docker]
 	packer validate -var-file=./machines/${machine}/builders/${builder}/${machine}.var.json ./machines/${machine}/builders/${builder}/${machine}.machine.json
@@ -28,7 +24,7 @@ check:
 manual-check:
 	docker run -it --rm romainprignon/desktop/ubuntu/focal:latest
 
-metal: # release on metal ex: make metal machine=desktop-ubuntu-focal A REVOIR
-	VBoxManage clonehd ./machines/${machine}/artefacts/vm/${machine}-disk001.vmdk ./machines/${machine}/artefacts/vm/${machine}.img --format RAW
-	cp -p releases/metal/README.md releases/metal/${machine}/README.md
-	cp -p releases/metal/install.sh releases/metal/${machine}/install.sh
+metal: # release on metal ex: make metal machine=desktop-ubuntu-focal
+	VBoxManage clonehd ./artefacts/vms/${machine}-disk001.vmdk ./artefacts/metal/${machine}.img --format RAW
+	cp -p ./doc/metal/README.md ./artefacts/metal/README.md
+	cp -p ./doc/metal/install.sh ./artefacts/metal/install.sh
