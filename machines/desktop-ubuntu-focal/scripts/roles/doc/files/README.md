@@ -1,5 +1,14 @@
 # To Do Manually
 
+## Keyboard (if qwerty)
+- in /usr/share/X11/xkb/symbols/pc
+```
+key <CAPS> {	[ Caps_Lock		]	};
+```
+- remove caps lock
+```
+key <CAPS> {};
+```
 
 ## dropbox
 - launch and configure

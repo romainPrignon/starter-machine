@@ -17,3 +17,7 @@ make release-metal
 ```
 will do: VBoxManage clonehd your-virtualbox-disk.vdi disk.img --format RAW
 will put it into releases folder with a readme containing instruction
+
+# FIX
+- swap
+- multipass
