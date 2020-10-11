@@ -4,6 +4,7 @@
   roles:
     - role: system
     - role: system_apps
+    - role: locales
     - role: user_apps
     - role: micro # when there is config
     - role: ssh # when there is config

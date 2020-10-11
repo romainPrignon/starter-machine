@@ -1,0 +1,15 @@
+---
+- name: install FR locales
+  tags: locales
+  become: yes
+  shell: locale-gen fr_FR fr_FR.UTF-8
+
+- name: install EN locales
+  tags: locales
+  become: yes
+  shell: locale-gen en_US en_US.UTF-8
+
+- name: configure EN lang
+  tags: locales
+  become: yes
+  shell: update-locale LANG=en_US.UTF-8
