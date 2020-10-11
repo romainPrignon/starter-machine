@@ -18,13 +18,17 @@ test: # test script
 build: # build image ex: make build machine=desktop-ubuntu-focal [builder=docker]
 	packer build -force -var-file=machines/${machine}/builders/${builder}/${machine}.var.json machines/${machine}/builders/${builder}/${machine}.machine.json
 
+build-local: # provision locally using ansible ex: make build-local machine=desktop-ubuntu-focal
+	export ANSIBLE_CONFIG=./machines/${machine}/scripts/ansible.cfg && \
+	ansible-playbook -vv -c local -i default, ./machines/${machine}/scripts/main.yml
+
 check:
 	echo check the artefactg with tools
 
-manual-check:
+check-manual:
 	docker run -it --rm romainprignon/desktop/ubuntu/focal:latest
 
-metal: # release on metal ex: make metal machine=desktop-ubuntu-focal
+release-metal: # release on metal ex: make metal machine=desktop-ubuntu-focal
 	VBoxManage clonehd ./artefacts/vms/${machine}-disk001.vmdk ./artefacts/metal/${machine}.img --format RAW
 	cp -p ./doc/metal/README.md ./artefacts/metal/README.md
 	cp -p ./doc/metal/install.sh ./artefacts/metal/install.sh
