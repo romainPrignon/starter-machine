@@ -2,6 +2,7 @@
 - name: system
   hosts: default
   roles:
+    - role: system
     - role: system_apps
     - role: user_apps
     - role: micro # when there is config

@@ -1,0 +1,17 @@
+---
+# - name: install swap
+#   tags: system
+#   vars:
+#     swap_file_size_mb: '8192'
+#   include_role:
+#     name: geerlingguy.swap
+#     apply:
+#       become: yes
+
+- name: copy sysctl config
+  tags: system
+  become: yes
+  copy:
+    src: sysctl.conf
+    dest: /etc/sysctl.conf
+    mode: '0644'
