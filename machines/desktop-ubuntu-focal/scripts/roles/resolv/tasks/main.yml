@@ -1,0 +1,33 @@
+---
+- name: install resolv
+  tags: resolve
+  become: yes
+  apt:
+    pkg:
+      - resolvconf
+    state: present
+    update_cache: yes
+    autoclean: yes
+    autoremove: yes
+
+- name: create resolv config dir
+  tags: resolv
+  become: yes
+  file:
+    path: /etc/resolvconf/resolv.conf.d
+    state: directory
+
+- name: copy resolv config
+  tags: resolv
+  become: yes
+  copy:
+    src: head
+    dest: /etc/resolvconf/resolv.conf.d/head
+    mode: '0644'
+
+- name: restart resolv service
+  tags: resolv
+  become: yes
+  service:
+    name: resolvconf
+    state: restarted

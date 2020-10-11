@@ -10,3 +10,9 @@
     - role: vim # when there is config
     - role: n # when there is config
     - role: fzf # when there is config
+
+  tasks:
+    - name: resolv
+      include_role:
+        name: resolv
+      when: "is_in_docker.stdout != 'bash (1, #threads: 1)'"
