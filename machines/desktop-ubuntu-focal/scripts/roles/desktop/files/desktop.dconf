@@ -19,7 +19,7 @@ application-id='org.gnome.Nautilus.desktop'
 
 
 [screensaver]
-picture-uri='file:///home/romainprignon/Dropbox/picture/wallpaper/screensaver.jpg'
+picture-uri='file:///home/romainprignon/img/screensaver.jpg'
 lock-delay=uint32 300
 picture-options='zoom'
 
@@ -59,7 +59,7 @@ switch-to-workspace-up=@as []
 automatic-timezone=true
 
 [background]
-picture-uri='file:///home/romainprignon/Dropbox/picture/wallpaper/background.jpg'
+picture-uri='file:///home/romainprignon/img/wallpaper.jpg'
 show-desktop-icons=false
 color-shading-type='solid'
 primary-color='#333333'

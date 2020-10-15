@@ -11,6 +11,7 @@
       - dkms
       - gcc
       - language-pack-en-base
+      - libglib2.0-dev-bin
       - linux-headers-generic # virtual on vpc
       - locales
       - python-pygments

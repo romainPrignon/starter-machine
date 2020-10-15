@@ -1,5 +1,7 @@
 # FIX
-- xdebug ansible
+- xdebug
+- multipass
+- swap
 
 # TODO
 ✔ faire une nomenclature: 
@@ -55,7 +57,8 @@
         ✘ /etc/bluetooth/main.conf (ca na jamais marcher)
     ✔ gestion des info au runtime: ntp, hostname (readme)   
 ✔ do release-metal command properly (MUST)
-- pouvoir provisionner localement (MUST)
+✔ pouvoir provisionner localement (MUST)
+    - tester de provisionenr une vm deja provisionner
 - install packer as dependencies (make setup) ansibl galaxy,... (SHOULD)
 - add quality (packer lint, ansible lint,yaml lint, test image, diff iamge,...)
 - mettre un outil pour remplacer make ici aussi

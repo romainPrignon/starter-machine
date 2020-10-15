@@ -7,6 +7,7 @@
 ## Hostname
 - sudo hostnamectl set-hostname MY_HOSTNAME
 - micro /etc/hosts
+- micro /etc/hostname
 
 
 ## Keyboard (if qwerty)
@@ -29,7 +30,7 @@ key <CAPS> {};
     - BottomPanel by abstract
     - Hide Dash X by edh
     - Hide Workspace Thumbnails by edh
-    - No Title Bar - Forked by BebopXD
+    - Pixel Saver by nMqMgEF
     - TaskBar 2020 by c0ldplasma
     - User Themes by fmuellner
 - reload dconf

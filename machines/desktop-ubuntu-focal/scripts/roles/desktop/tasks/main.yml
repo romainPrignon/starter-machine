@@ -49,6 +49,22 @@
     autoclean: yes
     autoremove: yes
 
+- name: create img dir
+  tags: desktop
+  file:
+    path: "{{ ansible_env.HOME }}/img"
+    state: directory
+
+- name: copy img
+  tags: desktop
+  copy:
+    src: "{{ item }}"
+    dest: "{{ ansible_env.HOME }}/img/{{ item }}"
+    mode: '0770'
+  with_items:
+    - screensaver.jpg
+    - wallpaper.jpg
+
 - name: copy dconf config
   tags: desktop
   copy:
@@ -86,3 +102,7 @@
 - name: load desktop config
   tags: desktop
   shell: dbus-launch dconf load /org/gnome/desktop/ < /tmp/desktop.dconf
+
+- name: set terminal legcy header bar settings
+  tags: desktop
+  shell: gsettings set org.gnome.Terminal.Legacy.Settings headerbar false
