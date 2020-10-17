@@ -31,13 +31,6 @@
     autoclean: yes
     autoremove: yes
 
-- name: add theme deb
-  tags: desktop
-  become: yes
-  apt_repository:
-    repo: ppa:alessandro-strada/ppa
-    state: present
-
 - name: install theme
   tags: desktop
   become: yes
