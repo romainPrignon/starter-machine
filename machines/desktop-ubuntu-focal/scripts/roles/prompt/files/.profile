@@ -10,8 +10,3 @@ if [ -n "$BASH_VERSION" ]; then
     . "$HOME/.bashrc"
     fi
 fi
-
-# enable google-drive
-# if [ -x "$(command -v google-drive-ocamlfuse)" ]; then
-#     google-drive-ocamlfuse -label peaks /home/$USER/drive-peaks
-# fi

@@ -13,7 +13,6 @@
       - gnome-system-log
       - gnome-terminal
       - gnome-tweak-tool
-      # - google-drive-ocamlfuse
       - nautilus
       - nautilus-dropbox
       - synaptic

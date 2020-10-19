@@ -71,3 +71,4 @@
     - change user password a la fin du provisionning ?
     - faire en sorte que l'user romainprignon ou celui du server soit créer au moment du provisionning comme cela c'est générique pour de vrai ?
         - les credential ne doivent pas etre versionner
+- mutualiser dotfiles et starter-machine pour trouver le bon équilibre et mutualiser les fichiers
