@@ -2,10 +2,16 @@ FROM ubuntu:focal
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update && apt-get install -y sudo ubuntu-desktop
+ARG user
+ARG password
 
-RUN useradd --create-home --password $(echo "romainprignon" | openssl passwd -1 -stdin) --shell /bin/bash romainprignon
-RUN usermod -aG sudo romainprignon
+RUN apt update && apt install -y \
+    openssl \
+    python3-minimal \
+    sudo
 
-USER romainprignon
-WORKDIR /home/romainprignon
+RUN useradd --create-home --password $(echo "$password" | openssl passwd -1 -stdin) --shell /bin/bash $user
+RUN usermod -aG sudo $user
+
+USER $user
+WORKDIR /home/$user

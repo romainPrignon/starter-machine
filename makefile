@@ -4,7 +4,7 @@
 builder?=packer
 
 install: # boostrap dev environment ex: make install
-	apt install ansible
+	sudo apt install ansible
 	ansible-galaxy collection install community.general
 	ansible-galaxy install geerlingguy.swap geerlingguy.php-versions geerlingguy.php geerlingguy.composer geerlingguy.php-xdebug
 

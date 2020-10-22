@@ -2,4 +2,5 @@ artefacts/
 node_modules/
 packer_cache/
 *.vmdk
+*.ovf
 *.var.json

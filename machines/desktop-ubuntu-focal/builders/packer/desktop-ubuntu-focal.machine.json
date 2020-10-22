@@ -3,7 +3,7 @@
     {
       "type": "virtualbox-ovf",
       "output_directory": "artefacts/vms",
-      "source_path": "templates/vms/ubuntu-focal/ubuntu-focal.ovf",
+      "source_path": "templates/vms/{{user `template`}}.ovf",
       "vm_name": "{{user `vm_name`}}",
       "ssh_username": "{{user `ssh_username`}}",
       "ssh_password": "{{user `ssh_password`}}",

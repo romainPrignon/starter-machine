@@ -12,6 +12,7 @@
 
 - name: install multipass
   tags: multipass
+  become: yes
   community.general.snap:
     name:
       - multipass
