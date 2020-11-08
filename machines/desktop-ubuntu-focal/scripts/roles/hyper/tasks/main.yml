@@ -1,0 +1,10 @@
+---
+- name: download hyper app
+  tags: hyper
+  get_url: "url=https://releases.hyper.is/download/AppImage dest={{ ansible_env.HOME }}/app/hyper.AppImage"
+
+- name: set hyper permission
+  tags: hyper
+  file:
+    path: "{{ ansible_env.HOME }}/app/hyper.AppImage"
+    mode: 'u=rx,g=rx,o=rx'

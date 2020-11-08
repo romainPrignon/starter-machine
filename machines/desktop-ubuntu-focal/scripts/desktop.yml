@@ -10,4 +10,5 @@
     - role: vscode
     - role: subl
     - role: jetbrain
+    - role: hyper
     - role: doc
