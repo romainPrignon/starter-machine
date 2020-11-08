@@ -8,3 +8,12 @@
   file:
     path: "{{ ansible_env.HOME }}/app/hyper.AppImage"
     mode: 'u=rx,g=rx,o=rx'
+
+- name: copy hyper config
+  tags: hyper
+  copy:
+    src: "{{ item }}"
+    dest: "{{ ansible_env.HOME }}/{{ item }}"
+    mode: '0644'
+  with_items:
+    - .hyper.js
