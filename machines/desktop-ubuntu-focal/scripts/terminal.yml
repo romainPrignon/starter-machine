@@ -3,4 +3,5 @@
   hosts: default
   roles:
     - role: prompt
+    - role: rc
     - role: zsh

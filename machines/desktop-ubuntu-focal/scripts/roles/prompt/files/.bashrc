@@ -15,9 +15,7 @@ if [ -f "$HOME/.functions" ]; then
 fi
 
 # include partner
-if [ -f "$HOME/.peaksrc" ]; then
-    . "$HOME/.peaksrc"
-fi
+for f in $HOME/.rc/*.rc; do source $f; done
 
 #######################################
 

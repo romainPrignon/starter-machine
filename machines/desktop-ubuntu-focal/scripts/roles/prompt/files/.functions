@@ -19,6 +19,10 @@ function shtd {
     shutdown +$1
 }
 
+function monit {
+    eval "$1" & top -p $!
+}
+
 # backup to $1 with name backup-<hostname>-<date>.tgz
 function backup() {
     # clean
