@@ -20,7 +20,7 @@ key <CAPS> {	[ Caps_Lock		]	};
 key <CAPS> {};
 ```
 
-## dropbox
+## insync
 - launch and configure
 
 
