@@ -28,7 +28,7 @@
   become: yes
   shell: >
     npm install -g \
-      babel-cli \
+      @babel/node \
       depcheck \
       gitmoji-cli \
       hotel \
