@@ -1,9 +1,11 @@
 .SILENT: build
 .PHONY: build
 
-build: # build image ex: make build container=desktop-ubuntu-focal user=foo password=bar
+tag ?= latest
+
+build: # build image ex: make build dist=ubuntu version=focal user=foo password=bar [tag=latest]
 	docker build \
-		-t romainprignon/desktop/ubuntu/focal:template \
+		-t ${user}/${dist}/${version}:${tag} \
 		--build-arg user=${user} \
 		--build-arg password=${password} \
-		./${container}
+		./${dist}/${version}

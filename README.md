@@ -26,7 +26,7 @@ $ make build-local machine=desktop-ubuntu-focal
 ## build container
 - first build the template image
 $ cd templates/containers
-$ make build container=desktop-ubuntu-focal
+$ make build dist=ubuntu version=focal user=foo password=bar tag=latest
 
 - then, build using ansible and docker builder
 $ cd ../..
