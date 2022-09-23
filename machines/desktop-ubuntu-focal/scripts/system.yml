@@ -8,7 +8,9 @@
     - role: user_apps
     - role: micro # when there is config
     - role: ssh # when there is config
+    - role: gh # when there is config
     - role: git # when there is config
+    # - role: git_machete # when there is config
     - role: vim # when there is config
     - role: n # when there is config
     - role: fzf # when there is config

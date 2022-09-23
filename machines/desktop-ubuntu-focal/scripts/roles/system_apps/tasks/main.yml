@@ -10,6 +10,7 @@
       - ca-certificates
       - dkms
       - gcc
+      - gpg
       - language-pack-en-base
       - libglib2.0-dev-bin
       - linux-headers-generic # virtual on vpc

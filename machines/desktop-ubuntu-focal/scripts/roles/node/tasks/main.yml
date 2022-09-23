@@ -29,11 +29,12 @@
   shell: >
     npm install -g \
       @babel/node \
+      cdktf-cli \
       depcheck \
+      git-split-diffs \
       gitmoji-cli \
       hotel \
       http-server \
-      now \
       pkgcount \
       thanks \
       ts-node \

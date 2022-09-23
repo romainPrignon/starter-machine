@@ -23,6 +23,7 @@
       - openssl
       - shellcheck
       - sqlite3
+      - tar
       - tree
       - unzip
       - wget

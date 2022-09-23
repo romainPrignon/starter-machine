@@ -14,6 +14,7 @@
       - gnome-terminal
       - gnome-tweak-tool
       - nautilus
+      - simplescreenrecorder
       - synaptic
       - tlp
     state: present

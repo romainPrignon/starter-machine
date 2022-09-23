@@ -11,3 +11,4 @@
     - role: deno
     - role: python
     - role: php
+    - role: terraform

@@ -13,7 +13,7 @@ export GOROOT=/usr/local/go
 export GOPATH=$HOME/workspace/go
 export GOBIN=$HOME/workspace/go/bin
 
-export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+export JAVA_HOME=/usr/lib/jvm/java-18-openjdk-amd64
 export JAVA_OPTIONS=-Xmx512M
 
 PATH="$HOME/bin:$PATH"
@@ -25,10 +25,10 @@ PATH="$HOME/.deno/bin:$PATH"
 PATH="$HOME/.pyenv/bin:$PATH"
 PATH="$HOME/.cargo/bin:$PATH"
 PATH="$HOME/.symfony/bin:$PATH"
-#PATH="$HOME/.pulumi/bin:$PATH"
 PATH="$GOROOT/bin:$PATH"
 PATH="$JAVA_HOME/jre/bin:$PATH"
 PATH="$HOME/.composer/vendor/bin:$PATH"
+PATH="$HOME/.poetry/bin:$PATH"
 
 export COMPOSER_HOME="$HOME/.composer"
 

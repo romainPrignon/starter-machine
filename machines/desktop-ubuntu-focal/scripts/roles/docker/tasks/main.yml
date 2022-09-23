@@ -3,6 +3,7 @@
   tags:
     - docker
     - docker-compose
+    - docker-compose-2
   become: yes
   apt:
     pkg:
@@ -24,9 +25,22 @@
   become: yes
   shell: usermod -aG docker $(whoami)
 
+- name: create docker plugin dir
+  tags: docker
+  file:
+    path: "{{ ansible_env.HOME }}/.docker/cli-plugins"
+    state: directory
+
 - name: install docker-compose
   tags: docker-compose
   get_url:
-    url: https://github.com/docker/compose/releases/download/1.27.3/docker-compose-Linux-x86_64
+    url: https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
     dest: "{{ ansible_env.HOME }}/bin/docker-compose"
+    mode: 'u=rx,g=rx,o=r'
+
+- name: download docker compose plugin
+  tags: docker-compose-2
+  get_url:
+    url: https://github.com/docker/compose/releases/download/v2.11.1/docker-compose-linux-x86_64
+    dest: "{{ ansible_env.HOME }}/.docker/cli-plugins/docker-compose"
     mode: 'u=rx,g=rx,o=r'

@@ -2,7 +2,7 @@
 - name: download packer
   tags: packer
   get_url:
-    url: https://releases.hashicorp.com/packer/1.6.4/packer_1.6.4_linux_amd64.zip
+    url: https://releases.hashicorp.com/packer/1.8.3/packer_1.8.3_linux_amd64.zip
     dest: /tmp/packer.zip
 
 - name: Extract packer

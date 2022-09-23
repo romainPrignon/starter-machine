@@ -12,7 +12,7 @@ module.exports = {
     fontSize: 13,
 
     // font family with optional fallbacks
-    fontFamily: 'Monospace',
+    fontFamily: 'Ubuntu Mono',
 
     // default font weight: 'normal' or 'bold'
     fontWeight: 'normal',
@@ -21,10 +21,10 @@ module.exports = {
     fontWeightBold: 'bold',
 
     // line height as a relative unit
-    lineHeight: 1,
+    lineHeight: 1.1,
 
     // letter spacing as a relative unit
-    letterSpacing: 0,
+    letterSpacing: 1.1,
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
     cursorColor: '#FFA500',
@@ -43,13 +43,13 @@ module.exports = {
 
     // terminal background color
     // opacity is only supported on macOS
-    backgroundColor: '#272825',
+    backgroundColor: '#232729',
 
     // terminal selection color
     selectionColor: '#888888',
 
     // border color (window, tabs)
-    borderColor: '#272825',
+    borderColor: '#232729',
 
     // custom CSS to embed in the main window
     css: `

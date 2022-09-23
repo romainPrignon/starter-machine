@@ -134,3 +134,8 @@ fi
 if [ -x "$(command -v symfony-autocomplete)" ]; then
   eval "$(symfony-autocomplete)"
 fi
+
+# terraform
+if [ -x "$(command -v terraform)" ]; then
+    complete -C /home/romainprignon/bin/terraform terraform
+fi

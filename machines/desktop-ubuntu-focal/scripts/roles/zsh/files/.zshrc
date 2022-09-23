@@ -113,6 +113,12 @@ if [ -x "$(command -v symfony-autocomplete)" ]; then
   eval "$(symfony-autocomplete)"
 fi
 
+## terraform
+if [ -x "$(command -v terraform)" ]; then
+  autoload -U +X bashcompinit && bashcompinit
+  complete -o nospace -C /home/romainprignon/bin/terraform terraform
+fi
+
 # must be at the end
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 

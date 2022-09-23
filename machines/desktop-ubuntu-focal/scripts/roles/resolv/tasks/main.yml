@@ -1,6 +1,6 @@
 ---
 - name: install resolv
-  tags: resolve
+  tags: resolv
   become: yes
   apt:
     pkg:
