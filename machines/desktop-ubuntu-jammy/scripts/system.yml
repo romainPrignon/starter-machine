@@ -1,0 +1,24 @@
+---
+- name: system
+  hosts: default
+  roles:
+    - role: ../../../../scripts/roles/system
+    - role: ../../../../scripts/roles/system_apps
+      vars:
+        python_pygments_variant: python3-pygments
+    - role: ../../../../scripts/roles/locales
+    - role: ../../../../scripts/roles/user_apps
+    - role: ../../../../scripts/roles/micro # when there is config
+    - role: ../../../../scripts/roles/ssh # when there is config
+    - role: ../../../../scripts/roles/gh # when there is config
+    - role: ../../../../scripts/roles/git # when there is config
+    # - role: ../../../../scripts/roles/git-machete # when there is config
+    - role: ../../../../scripts/roles/vim # when there is config
+    - role: ../../../../scripts/roles/n # when there is config
+    - role: ../../../../scripts/roles/fzf # when there is config
+
+  tasks:
+    - name: resolv
+      include_role:
+        name: ../../../../scripts/roles/resolv
+      when: "is_in_docker.stdout != 'bash (1, #threads: 1)'"

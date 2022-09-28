@@ -32,63 +32,31 @@ function monit {
     eval "$1" & top -p $!
 }
 
-# backup to $1 with name backup-<hostname>-<date>.tgz
-function backup() {
-    # clean
-    rm -rf $HOME/backup/apt $HOME/backup/dconf.settings
-    mkdir -p $HOME/backup/home
+function sandbox {
+    name=$1
+    type=$2
+    rm=$3
 
-    # backup packages
-    dpkg --get-selections > $HOME/backup/apt
+    case "$type" in
+    gen) image="ubuntu:jammy";volume="-v $name:/root" ;;
+    min) image="romainprignon/ubuntu/jammy";volume="-v $name:/home/romainprignon" ;;
+    *) image="ubuntu:jammy";volume="-v $name:/root" ;;
+    esac
 
-    # Prepare backup
-    date=$(date +%F)
-    hostname=$(hostname -s)
-    archive_filename="backup-$hostname-$date.tgz"
-    if [ -z "$1" ]; then
-        dest="/home/romainprignon/backup/home"
-    else
-        dest=$1
+    mkdir -p $HOME/sandbox/$name
+    docker volume create --driver local \
+        --opt type=none \
+        --opt device=$HOME/sandbox/$name \
+        --opt o=bind \
+        $name
+
+    network="--network host"
+
+    docker start -ai $name || docker run -it --name $name $volume $network $image
+
+    if [ "$rm" == "--rm" ]; then
+        docker rm $name
+        docker volume rm $name
+        sudo rm -rf $HOME/sandbox/$name
     fi
-    included_files="/home/romainprignon/app \
-                    /home/romainprignon/.aws \
-                    /home/romainprignon/.azure \
-                    /home/romainprignon/bin \
-                    /home/romainprignon/.config \
-                    /home/romainprignon/backup \
-                    /home/romainprignon/Documents \
-                    /home/romainprignon/keys \
-                    /home/romainprignon/Music \
-                    /home/romainprignon/Pictures \
-                    /home/romainprignon/Videos \
-                    /home/romainprignon/.ssh \
-                    /home/romainprignon/.local/share/gnome-shell/extensions \
-                    /etc/apt/sources.list.d"
-    excluded_files="--exclude /home/romainprignon/backup/home \
-                    --exclude /home/romainprignon/.config/google-chrome"
-
-    # backup
-    dconf dump / > $HOME/backup/dconf.settings
-    sudo tar $excluded_files -cpzf $dest/$archive_filename $included_files
-}
-
-# restore from $1 to $2
-function restore() {
-    if [ -z "$2" ]; then
-        dest="/"
-    else
-        dest=$2
-    fi
-
-    sudo tar -xvpzf $1 -C $dest --numeric-owner
-
-    # restore: dconf
-    dconf load / < $HOME/backup/dconf.settings
-
-    # restore: home
-    sudo apt update
-    sudo apt install dselect
-    sudo dselect update
-    sudo dpkg --set-selections < $HOME/backup/apt
-    sudo apt-get -u dselect-upgrade
 }

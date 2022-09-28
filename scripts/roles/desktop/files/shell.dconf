@@ -3,10 +3,10 @@ toggle-message-tray=@as []
 toggle-overview=@as []
 
 [/]
-enabled-extensions=['alternate-tab@gnome-shell-extensions.gcampax.github.com', 'hide-dash@xenatt.github.com', 'pixel-saver@deadalnix.me', 'hide-workspace@xenatt.github.com', 'bottompanel@tmoer93', 'TaskBar@c0ldplasma', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'no-title-bar@jonasspoehler.de']
+enabled-extensions=['user-theme@gnome-shell-extensions.gcampax.github.com', 'dash-to-panel@jderose9.github.com', 'sound-output-device-chooser@kgshank.net', 'start-overlay-in-application-view@Hex_cz', 'escape-overview@raelgc', 'AlphabeticalAppGrid@stuarthayhurst', 'unlockDialogBackground@sun.wxg@gmail.com', 'just-perfection-desktop@just-perfection', 'emoji-selector@maestroschan.fr', 'gtktitlebar@velitasali.github.io']
 had-bluetooth-devices-setup=true
 app-picker-view=uint32 1
-favorite-apps=['org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop', 'sublime_subl.desktop', 'google-chrome.desktop']
+favorite-apps=['org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop', 'google-chrome.desktop', 'sublime_text.desktop']
 
 [calendar]
 show-weekdate=false
@@ -23,31 +23,44 @@ manual-minutes=0
 ui-notification=true
 manual-seconds=0
 
-[extensions/TaskBar]
-position-favorites=1
-bottom-panel=false
-display-favorites=true
-appview-button-icon='/home/romainprignon/.local/share/gnome-shell/extensions/TaskBar@zpydr/images/appview-button-default.svg'
-position-appview-button=0
-activities-button=false
-display-showapps-button=true
-bottom-panel-original-background-color='rgba(0, 0, 0, 0)'
-display-tasks=false
-extension-path='/home/romainprignon/.local/share/gnome-shell/extensions/TaskBar@zpydr'
-desktop-button-icon='/home/romainprignon/.local/share/gnome-shell/extensions/TaskBar@zpydr/images/desktop-button-default.png'
-display-desktop-button=false
-display-workspace-button=false
-hover-event=0
-tray-button-icon='/home/romainprignon/.local/share/gnome-shell/extensions/TaskBar@zpydr/images/bottom-panel-tray-button.svg'
-position-max-right=2
-appearance-selection='favorites'
-position-workspace-button=2
-position-changed=false
-top-panel-original-background-color='rgba(0, 0, 0, 0)'
-first-start=false
+[extensions/dash-to-panel]
+animate-appicon-hover-animation-extent={'RIPPLE': 4, 'PLANK': 4, 'SIMPLE': 1}
+appicon-margin=1
+appicon-padding=4
+available-monitors=[0]
+dot-style-focused='DASHES'
+dot-style-unfocused='DASHES'
+hotkeys-overlay-combo='TEMPORARILY'
+leftbox-padding=-1
+panel-anchors='{"0":"MIDDLE"}'
+panel-element-positions='{"0":[{"element":"showAppsButton","visible":true,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"leftBox","visible":true,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"centerBox","visible":true,"position":"stackedBR"},{"element":"dateMenu","visible":true,"position":"centerMonitor"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":true,"position":"stackedBR"}]}'
+panel-lengths='{"0":100}'
+panel-sizes='{"0":30}'
+primary-monitor=0
+show-tooltip=false
+show-window-previews=false
+status-icon-padding=-1
+trans-bg-color='#253040'
+trans-use-custom-bg=true
+tray-padding=-1
+window-preview-title-position='TOP'
 
-[extensions/bingwallpaper]
-notify=false
-previous=',/usr/share/backgrounds/gnome/FootFall.png'
-set-background=false
-hide=true
+[extensions/emoji-selector]
+emoji-keybinding=['<Super>e']
+
+[extensions/just-perfection]
+activities-button=true
+app-menu=true
+dash=false
+dash-separator=true
+double-super-to-appgrid=true
+panel=true
+startup-status=0
+theme=false
+window-menu-take-screenshot-button=false
+window-picker-icon=true
+window-preview-caption=true
+window-preview-close-button=true
+workspace=false
+workspace-switcher-should-show=false
+workspaces-in-app-grid=false

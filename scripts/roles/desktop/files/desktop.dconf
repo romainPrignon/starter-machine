@@ -1,14 +1,15 @@
 [interface]
 font-name='Ubuntu 11'
-gtk-im-module='gtk-im-context-simple'
 show-battery-percentage=true
-cursor-theme='DMZ-White'
 toolkit-accessibility=false
 icon-theme='ubuntu-mono-dark'
 monospace-font-name='Ubuntu Mono 13'
 enable-animations=false
 gtk-theme='Adwaita-dark'
 clock-show-date=true
+color-scheme='prefer-dark'
+font-antialiasing='rgba'
+font-hinting='slight'
 
 [notifications]
 application-children=['org-gnome-nautilus']
@@ -26,16 +27,19 @@ picture-options='zoom'
 [peripherals/touchpad]
 natural-scroll=true
 tap-to-click=true
+two-finger-scrolling-enabled=true
 
 [peripherals/mouse]
 speed=0.0
 left-handed=false
 
 [search-providers]
-sort-order=['gnome-contacts.desktop', 'gnome-documents.desktop', 'nautilus.desktop']
+disabled=['org.gnome.Calculator.desktop', 'org.gnome.Characters.desktop', 'org.gnome.Contacts.desktop', 'org.gnome.Software.desktop', 'org.gnome.Terminal.desktop']
+sort-order=['gnome-documents.desktop', 'nautilus.desktop']
 
 [wm/preferences]
 titlebar-font='Ubuntu Medium 11'
+num-workspaces=1
 
 [wm/keybindings]
 move-to-workspace-last=@as []
@@ -54,6 +58,8 @@ move-to-monitor-right=@as []
 move-to-workspace-down=@as []
 move-to-monitor-up=@as []
 switch-to-workspace-up=@as []
+switch-windows=['<Alt>Tab']
+switch-windows-backward=['<Shift><Alt>Tab']
 
 [datetime]
 automatic-timezone=true
@@ -69,3 +75,6 @@ secondary-color='#333333'
 [input-sources]
 sources=[('xkb', 'fr'), ('xkb', 'us')]
 xkb-options=@as []
+
+[session]
+idle-delay=uint32 300

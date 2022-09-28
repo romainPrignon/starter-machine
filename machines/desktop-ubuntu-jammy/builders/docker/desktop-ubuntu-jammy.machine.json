@@ -1,0 +1,40 @@
+{
+  "builders": [
+    {
+      "type": "docker",
+      "image": "romainprignon/desktop/ubuntu/jammy:template",
+      "pull": false,
+      "commit": true,
+      "run_command": [
+        "-d",
+        "-i",
+        "-t",
+        "{{.Image}}",
+        "/bin/bash"
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "ansible",
+      "ansible_env_vars": [
+        "ANSIBLE_CONFIG=./machines/desktop-ubuntu-jammy/scripts/ansible.cfg"
+      ],
+      "extra_arguments": [
+        "-vv",
+        "--extra-vars",
+        "ansible_user={{user `ssh_username`}} ansible_ssh_pass={{user `ssh_password`}} ansible_sudo_pass={{user `sudo_password`}}"
+      ],
+      "playbook_file": "./machines/desktop-ubuntu-jammy/scripts/main.yml"
+    }
+  ],
+  "post-processors": [
+    [
+      {
+        "type": "docker-tag",
+        "repository": "romainprignon/desktop/ubuntu/jammy",
+        "tag": "latest"
+      }
+    ]
+  ]
+}

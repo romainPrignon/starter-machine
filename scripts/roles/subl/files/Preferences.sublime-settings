@@ -21,6 +21,7 @@
 	[
 	],
 	"font_size": 12,
+	"gtk_client_side_window_decorations": false,
 	"highlight_line": true,
 	"highlight_modified_tabs": true,
 	"hot_exit": true,

@@ -26,6 +26,8 @@
     - ntp configure timedatectl
     - hostname
 - ecrire les scripts et les tester (ansible) 
+    java ??
+    go ??
     ✔ node
     ✔ remove executable 
     ✔ exports correct path apps app 

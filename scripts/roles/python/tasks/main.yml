@@ -51,9 +51,11 @@
     path: /usr/bin/pip3
 
 - name: download poetry
+  tags: python
   get_url:
     url: https://install.python-poetry.org
     dest: /tmp/install-poetry.py
 
 - name: install poetry
+  tags: python
   command: python3 /tmp/install-poetry.py

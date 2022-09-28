@@ -1,0 +1,14 @@
+---
+- name: runtime
+  hosts: default
+
+  # - role: multipass
+  roles:
+    - role: ../../../../scripts/roles/ansible
+    - role: ../../../../scripts/roles/docker
+    - role: ../../../../scripts/roles/packer
+    - role: ../../../../scripts/roles/node
+    - role: ../../../../scripts/roles/deno
+    - role: ../../../../scripts/roles/python
+    - role: ../../../../scripts/roles/php
+    - role: ../../../../scripts/roles/terraform

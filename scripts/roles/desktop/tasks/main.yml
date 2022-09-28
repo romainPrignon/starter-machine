@@ -10,6 +10,7 @@
       - gnome-core
       - xfonts-base
       - xserver-xorg
+      - libglib2.0-dev-bin
     state: present
     update_cache: yes
     autoclean: yes
@@ -102,3 +103,28 @@
 - name: set terminal legcy header bar settings
   tags: desktop
   shell: gsettings set org.gnome.Terminal.Legacy.Settings headerbar false
+
+- name: set terminal legcy header bar settings
+  tags: desktop
+  become: yes
+  shell: sed -i 's/#WaylandEnable=false/WaylandEnable=false/g' /etc/gdm3/custom.conf
+
+- name: download gdm background
+  tags: desktop
+  get_url:
+    url: https://github.com/PRATAP-KUMAR/ubuntu-gdm-set-background/archive/main.tar.gz
+    dest: /tmp/ubuntu-gdm-set-background.tar.gz
+
+- name: extract gdm background
+  tags: desktop
+  unarchive:
+    src: /tmp/ubuntu-gdm-set-background.tar.gz
+    dest: /tmp
+    remote_src: yes
+
+- name: set login background
+  tags: desktop
+  become: yes
+  shell: "/tmp/ubuntu-gdm-set-background-main/ubuntu-gdm-set-background --image {{ ansible_env.HOME }}/img/screensaver.jpg"
+  register: result
+  failed_when: result.rc != 1

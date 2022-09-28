@@ -12,6 +12,5 @@
     dest: "{{ ansible_env.HOME }}/scripts/{{ item }}"
     mode: '0744'
   with_items:
-    - change-gdm-background.sh
     - focus-terminal.sh
     - git-standup.sh
