@@ -23,7 +23,7 @@ build-local: # provision locally using ansible ex: make build-local machine=desk
 	ansible-playbook -vv -c local -i default, ./machines/${machine}/scripts/main.yml
 
 check:
-	echo check the artefactg with tools
+	docker run -it --rm -v ${PWD}/check.sh:/opt/check.sh romainprignon/desktop/ubuntu/${version}:latest bash /opt/check.sh
 
 qa: # manual testing ex: make qa version=focal
 	docker run -it --rm romainprignon/desktop/ubuntu/${version}:latest

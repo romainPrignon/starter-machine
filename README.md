@@ -48,9 +48,14 @@ $ make build machine=desktop-ubuntu-focal builder=packer
 
 ### metal
 - create a raw image that can be used with `dd`
+```
 $ make release-metal
-
+```
 
 # FIX
 - swap
 - multipass
+
+
+# QA
+source `.profile` first in docker
