@@ -32,10 +32,12 @@
 
 - name: copy .exports
   tags: prompt
-  copy:
-    src: .exports
+  template:
+    src: ../files/.exports
     dest: "{{ ansible_env.HOME }}/.exports"
     mode: '0644'
+  vars:
+    _java_version: "{{ java_version }}"
 
 - name: copy .functions
   tags: prompt

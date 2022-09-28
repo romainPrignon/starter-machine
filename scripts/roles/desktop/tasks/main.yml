@@ -5,6 +5,7 @@
   apt:
     pkg:
       - chrome-gnome-shell
+      - dbus-x11
       - gdm3
       - gnome-core
       - xfonts-base
@@ -14,18 +15,20 @@
     autoclean: yes
     autoremove: yes
 
-- name: install fonts
-  tags: fonts
-  become: yes
-  apt:
-    pkg:
+- name: set fonts
+  set_fact:
+    fonts:
       - font-manager
       - fonts-droid-fallback
       - fonts-inconsolata
       - fonts-liberation
-      - ttf-dejavu
       - ttf-ancient-fonts
-      - ttf-ubuntu-font-family
+
+- name: install fonts
+  tags: fonts
+  become: yes
+  apt:
+    pkg: "{{ fonts + font_ubuntu_variant + font_dejavu_variant }}"
     state: present
     update_cache: yes
     autoclean: yes

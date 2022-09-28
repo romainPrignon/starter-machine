@@ -3,12 +3,19 @@
   hosts: default
 
   roles:
-    - role: desktop
-    - role: gtk
-    - role: desktop_apps
-    - role: desktop_scripts
-    - role: vscode
-    - role: subl
-    - role: jetbrain
-    - role: hyper
-    - role: doc
+    - role: ../../../../scripts/roles/desktop
+      vars:
+        font_dejavu_variant:
+          - ttf-dejavu
+        font_ubuntu_variant:
+          - ttf-ubuntu-font-family
+    - role: ../../../../scripts/roles/gtk
+    - role: ../../../../scripts/roles/desktop_apps
+      vars:
+        gnome_tweak_variant: gnome-tweak-tool
+    - role: ../../../../scripts/roles/desktop_scripts
+    - role: ../../../../scripts/roles/vscode
+    - role: ../../../../scripts/roles/subl
+    - role: ../../../../scripts/roles/jetbrain
+    - role: ../../../../scripts/roles/hyper
+    - role: ../../../../scripts/roles/doc

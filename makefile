@@ -25,8 +25,8 @@ build-local: # provision locally using ansible ex: make build-local machine=desk
 check:
 	echo check the artefactg with tools
 
-check-manual:
-	docker run -it --rm romainprignon/desktop/ubuntu/focal:latest
+qa: # manual testing ex: make qa version=focal
+	docker run -it --rm romainprignon/desktop/ubuntu/${version}:latest
 
 release-metal: # release on metal ex: make metal machine=desktop-ubuntu-focal
 	VBoxManage clonehd ./artefacts/vms/${machine}-disk001.vmdk ./artefacts/metal/${machine}.img --format RAW

@@ -29,6 +29,9 @@ alias sf3="php bin/console"
 alias dm="docker-machine"
 alias dc="docker-compose"
 
+# terraform
+alias tf="terraform"
+
 # scripts
 alias standup="sh ~/scripts/git-standup.sh"
 alias meteo="curl -4 wttr.in/Lyon"

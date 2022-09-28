@@ -13,7 +13,7 @@ export GOROOT=/usr/local/go
 export GOPATH=$HOME/workspace/go
 export GOBIN=$HOME/workspace/go/bin
 
-export JAVA_HOME=/usr/lib/jvm/java-18-openjdk-amd64
+export JAVA_HOME=/usr/lib/jvm/java-{{ _java_version }}-openjdk-amd64
 export JAVA_OPTIONS=-Xmx512M
 
 PATH="$HOME/bin:$PATH"

@@ -12,7 +12,7 @@
       - gnome-screenshot
       - gnome-system-log
       - gnome-terminal
-      - gnome-tweak-tool
+      - "{{ gnome_tweak_variant }}"
       - nautilus
       - simplescreenrecorder
       - synaptic

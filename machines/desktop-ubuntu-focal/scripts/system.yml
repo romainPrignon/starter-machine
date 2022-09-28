@@ -2,21 +2,23 @@
 - name: system
   hosts: default
   roles:
-    - role: system
-    - role: system_apps
-    - role: locales
-    - role: user_apps
-    - role: micro # when there is config
-    - role: ssh # when there is config
-    - role: gh # when there is config
-    - role: git # when there is config
-    # - role: git_machete # when there is config
-    - role: vim # when there is config
-    - role: n # when there is config
-    - role: fzf # when there is config
+    - role: ../../../../scripts/roles/system
+    - role: ../../../../scripts/roles/system_apps
+      vars:
+        python_pygments_variant: python-pygments
+    - role: ../../../../scripts/roles/locales
+    - role: ../../../../scripts/roles/user_apps
+    - role: ../../../../scripts/roles/micro # when there is config
+    - role: ../../../../scripts/roles/ssh # when there is config
+    - role: ../../../../scripts/roles/gh # when there is config
+    - role: ../../../../scripts/roles/git # when there is config
+    # - role: ../../../../scripts/roles/git-machete # when there is config
+    - role: ../../../../scripts/roles/vim # when there is config
+    - role: ../../../../scripts/roles/n # when there is config
+    - role: ../../../../scripts/roles/fzf # when there is config
 
   tasks:
     - name: resolv
       include_role:
-        name: resolv
+        name: ../../../../scripts/roles/resolv
       when: "is_in_docker.stdout != 'bash (1, #threads: 1)'"
