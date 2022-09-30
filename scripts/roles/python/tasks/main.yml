@@ -5,6 +5,7 @@
   apt:
     pkg:
       - curl
+      - git
       - zlib1g-dev
       - libffi-dev
       - libbz2-dev
@@ -59,3 +60,9 @@
 - name: install poetry
   tags: python
   command: python3 /tmp/install-poetry.py
+
+- name: install python global deps
+  tags: python
+  shell: >
+    pip install \
+      zxpy

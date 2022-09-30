@@ -39,4 +39,5 @@
       thanks \
       ts-node \
       types-checker \
-      typescript
+      typescript \
+      zx
