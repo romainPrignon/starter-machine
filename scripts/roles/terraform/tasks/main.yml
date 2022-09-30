@@ -1,0 +1,21 @@
+---
+- name: download terraform bin
+  tags: terraform
+  get_url: url=https://releases.hashicorp.com/terraform/1.3.0/terraform_1.3.0_linux_amd64.zip dest=/tmp/terraform.zip
+
+- name: extract terraform bin
+  tags: terraform
+  unarchive:
+    src: /tmp/terraform.zip
+    dest: /tmp
+    remote_src: yes
+
+- name: install terraform bin
+  tags: terraform
+  shell: "mv /tmp/terraform {{ ansible_env.HOME }}/bin/terraform"
+
+- name: set terraform permission
+  tags: terraform
+  file:
+    path: "{{ ansible_env.HOME }}/bin/terraform"
+    mode: 'u=rx,g=rx,o=r'

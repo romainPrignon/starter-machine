@@ -1,0 +1,7 @@
+{
+    "template": "ubuntu-jammy/ubuntu-jammy",
+    "vm_name": "ubuntu-jammy",
+    "ssh_username": "romainprignon",
+    "ssh_password": "xxx",
+    "sudo_password": "xxx"
+}

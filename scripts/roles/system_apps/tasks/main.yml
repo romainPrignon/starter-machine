@@ -1,0 +1,24 @@
+---
+- name: install system apps
+  tags: system_apps
+  become: yes
+  apt:
+    pkg:
+      - apt-transport-https
+      - apt-utils
+      - build-essential
+      - ca-certificates
+      - dkms
+      - gcc
+      - gpg
+      - language-pack-en-base
+      - libglib2.0-dev-bin
+      - linux-headers-generic # virtual on vpc
+      - locales
+      - "{{ python_pygments_variant }}"
+      - python3-software-properties
+      - software-properties-common
+    state: present
+    update_cache: yes
+    autoclean: yes
+    autoremove: yes

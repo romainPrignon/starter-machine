@@ -1,0 +1,130 @@
+---
+- name: install desktop
+  tags: desktop
+  become: yes
+  apt:
+    pkg:
+      - chrome-gnome-shell
+      - dbus-x11
+      - gdm3
+      - gnome-core
+      - xfonts-base
+      - xserver-xorg
+      - libglib2.0-dev-bin
+    state: present
+    update_cache: yes
+    autoclean: yes
+    autoremove: yes
+
+- name: set fonts
+  set_fact:
+    fonts:
+      - font-manager
+      - fonts-droid-fallback
+      - fonts-inconsolata
+      - fonts-liberation
+      - ttf-ancient-fonts
+
+- name: install fonts
+  tags: fonts
+  become: yes
+  apt:
+    pkg: "{{ fonts + font_ubuntu_variant + font_dejavu_variant }}"
+    state: present
+    update_cache: yes
+    autoclean: yes
+    autoremove: yes
+
+- name: install theme
+  tags: desktop
+  become: yes
+  apt:
+    pkg:
+      - arc-theme
+    state: present
+    update_cache: yes
+    autoclean: yes
+    autoremove: yes
+
+- name: create img dir
+  tags: desktop
+  file:
+    path: "{{ ansible_env.HOME }}/img"
+    state: directory
+
+- name: copy img
+  tags: desktop
+  copy:
+    src: "{{ item }}"
+    dest: "{{ ansible_env.HOME }}/img/{{ item }}"
+    mode: '0770'
+  with_items:
+    - screensaver.jpg
+    - wallpaper.jpg
+
+- name: copy dconf config
+  tags: desktop
+  copy:
+    src: "{{ item }}"
+    dest: "/tmp/{{ item }}"
+    mode: '0644'
+  with_items:
+    - nautilus.dconf
+    - power-manager.dconf
+    - settings-daemon.dconf
+    - shell.dconf
+    - terminal.dconf
+    - desktop.dconf
+
+- name: load explorer config
+  tags: desktop
+  shell: dbus-launch dconf load /org/gnome/nautilus/ < /tmp/nautilus.dconf
+
+- name: load power config
+  tags: desktop
+  shell: dbus-launch dconf load /org/gnome/power-manager/ < /tmp/power-manager.dconf
+
+- name: load daemon config
+  tags: desktop
+  shell: dbus-launch dconf load /org/gnome/settings-daemon/ < /tmp/settings-daemon.dconf
+
+- name: load shell config
+  tags: desktop
+  shell: dbus-launch dconf load /org/gnome/shell/ < /tmp/shell.dconf
+
+- name: load terminal config
+  tags: desktop
+  shell: dbus-launch dconf load /org/gnome/terminal/ < /tmp/terminal.dconf
+
+- name: load desktop config
+  tags: desktop
+  shell: dbus-launch dconf load /org/gnome/desktop/ < /tmp/desktop.dconf
+
+- name: set terminal legcy header bar settings
+  tags: desktop
+  shell: gsettings set org.gnome.Terminal.Legacy.Settings headerbar false
+
+- name: set terminal legcy header bar settings
+  tags: desktop
+  become: yes
+  shell: sed -i 's/#WaylandEnable=false/WaylandEnable=false/g' /etc/gdm3/custom.conf
+
+- name: download gdm background
+  tags: desktop
+  get_url:
+    url: https://github.com/PRATAP-KUMAR/ubuntu-gdm-set-background/archive/main.tar.gz
+    dest: /tmp/ubuntu-gdm-set-background.tar.gz
+
+- name: extract gdm background
+  tags: desktop
+  unarchive:
+    src: /tmp/ubuntu-gdm-set-background.tar.gz
+    dest: /tmp
+    remote_src: yes
+
+- name: set login background
+  tags: desktop
+  become: yes
+  shell: "/tmp/ubuntu-gdm-set-background-main/ubuntu-gdm-set-background --image {{ ansible_env.HOME }}/img/screensaver.jpg"
+  register: result
+  failed_when: result.rc != 1

@@ -1,0 +1,56 @@
+---
+- name: create vscode config dir
+  tags: vscode
+  file:
+    path: "{{ ansible_env.HOME }}/.config/Code/User"
+    state: directory
+
+- name: fetch vscode app
+  tags: vscode
+  get_url: url=https://update.code.visualstudio.com/1.71.2/linux-deb-x64/stable dest=/tmp/code-1.71.2.deb
+
+- name: install vscode app
+  tags: vscode
+  become: yes
+  apt:
+    deb: /tmp/code-1.71.2.deb
+    update_cache: yes
+    autoclean: yes
+    autoremove: yes
+
+- name: install vscode extension
+  tags: vscode
+  shell: "code --install-extension {{ item }}"
+  register: result
+  failed_when: result.rc != 0
+  with_items:
+    - chakrounanas.turbo-console-log
+    - dbaeumer.vscode-eslint
+    - denoland.vscode-deno
+    - EditorConfig.EditorConfig
+    - eg2.vscode-npm-script
+    - xdebug.php-debug
+    - zobo.php-intellisense
+    - geddski.macros
+    - GitHub.remotehub
+    - ikappas.phpcs
+    - mikestead.dotenv
+    - ms-python.python
+    - ms-python.vscode-pylance
+    - ms-toolsai.jupyter
+    - ms-vscode-remote.remote-containers
+    - ms-vsliveshare.vsliveshare
+    - PKief.material-icon-theme
+    - redhat.vscode-yaml
+    - waderyan.gitblame
+    - yatki.vscode-surround
+
+- name: copy vscode config
+  tags: vscode
+  copy:
+    src: "{{ item }}"
+    dest: "{{ ansible_env.HOME }}/.config/Code/User/{{ item }}"
+    mode: '0644'
+  with_items:
+    - settings.json
+    - keybindings.json

@@ -1,0 +1,65 @@
+---
+- name: create .composer dir
+  tags: php
+  file:
+    path: "{{ ansible_env.HOME }}/.composer"
+    state: directory
+
+- name: define php version
+  vars:
+    php_version: '8.1'
+    php_versions_install_recommends: false
+  include_role:
+    name: geerlingguy.php-versions
+    apply:
+      become: yes
+
+- name: install php
+  vars:
+    php_enable_webserver: false
+    php_install_recommends: false
+    php_packages:
+      - php
+      - php8.1-apcu
+      - php8.1-common
+      - php8.1-cli
+      - php8.1-curl
+      - php8.1-dev
+      - php8.1-intl
+      - php8.1-mbstring
+      - php8.1-mysql
+      - php8.1-opcache
+      - php8.1-readline
+      - php8.1-sqlite3
+      - php8.1-xdebug
+      - php8.1-xml
+      - php8.1-zip
+  include_role:
+    name: geerlingguy.php
+    apply:
+      become: yes
+
+- name: install composer
+  vars:
+    composer_path: "{{ ansible_env.HOME }}/bin/composer"
+  include_role:
+    name: geerlingguy.composer
+    apply:
+      become: yes
+
+- name: copy composer.json
+  tags: php
+  copy:
+    src: composer.json
+    dest: "{{ ansible_env.HOME }}/.composer/composer.json"
+    mode: '0644'
+
+# - name: install composer global deps
+#   tags: php
+#   shell: "{{ ansible_env.HOME }}/bin/composer global install"
+
+- name: install symfony
+  tags: php
+  shell: wget https://get.symfony.com/cli/installer -O - | bash
+  args:
+    creates: "{{ ansible_env.HOME }}/.symfony/bin/symfony" # run if file not exist

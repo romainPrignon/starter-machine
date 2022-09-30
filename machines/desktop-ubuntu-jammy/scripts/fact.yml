@@ -1,0 +1,8 @@
+---
+- name: fact
+  hosts: default
+  tasks:
+    - name: register is_in_docker fact
+      tags: fact
+      register: is_in_docker
+      shell: cat /proc/1/sched | head -n 1

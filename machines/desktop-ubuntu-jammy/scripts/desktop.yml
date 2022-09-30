@@ -1,0 +1,22 @@
+---
+- name: desktop
+  hosts: default
+
+  roles:
+    - role: ../../../../scripts/roles/desktop
+      vars:
+        font_dejavu_variant:
+          - fonts-dejavu
+        font_ubuntu_variant:
+          - fonts-ubuntu
+          - fonts-ubuntu-console
+    - role: ../../../../scripts/roles/gtk
+    - role: ../../../../scripts/roles/desktop_apps
+      vars:
+        gnome_tweak_variant: gnome-tweaks
+    - role: ../../../../scripts/roles/desktop_scripts
+    - role: ../../../../scripts/roles/vscode
+    - role: ../../../../scripts/roles/subl
+    - role: ../../../../scripts/roles/jetbrain
+    - role: ../../../../scripts/roles/hyper
+    - role: ../../../../scripts/roles/doc

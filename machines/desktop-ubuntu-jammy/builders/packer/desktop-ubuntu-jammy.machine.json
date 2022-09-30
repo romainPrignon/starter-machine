@@ -1,0 +1,44 @@
+{
+  "builders": [
+    {
+      "type": "virtualbox-ovf",
+      "output_directory": "artefacts/vms",
+      "source_path": "templates/vms/{{user `template`}}.ovf",
+      "vm_name": "{{user `vm_name`}}",
+      "ssh_username": "{{user `ssh_username`}}",
+      "ssh_password": "{{user `ssh_password`}}",
+      "headless": true,
+      "ssh_pty": true,
+      "shutdown_command": "echo '{{user `ssh_password`}}' | sudo -S shutdown -P now",
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--memory",
+          "2048"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--cpus",
+          "2"
+        ]
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "ansible",
+      "ansible_env_vars": [
+        "ANSIBLE_CONFIG=./machines/desktop-ubuntu-jammy/scripts/ansible.cfg"
+      ],
+      "extra_arguments": [
+        "-vv",
+        "--extra-vars",
+        "ansible_host={{build `Host`}} ansible_port={{build `Port`}} ansible_user={{user `ssh_username`}} ansible_ssh_pass={{user `ssh_password`}} ansible_sudo_pass={{user `sudo_password`}}"
+      ],
+      "playbook_file": "./machines/desktop-ubuntu-jammy/scripts/main.yml"
+    }
+  ],
+  "post-processors": []
+}

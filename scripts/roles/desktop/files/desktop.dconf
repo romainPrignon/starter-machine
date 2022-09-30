@@ -1,0 +1,80 @@
+[interface]
+font-name='Ubuntu 11'
+show-battery-percentage=true
+toolkit-accessibility=false
+icon-theme='ubuntu-mono-dark'
+monospace-font-name='Ubuntu Mono 13'
+enable-animations=false
+gtk-theme='Adwaita-dark'
+clock-show-date=true
+color-scheme='prefer-dark'
+font-antialiasing='rgba'
+font-hinting='slight'
+
+[notifications]
+application-children=['org-gnome-nautilus']
+
+[notifications/application/org-gnome-nautilus]
+application-id='org.gnome.Nautilus.desktop'
+
+
+
+[screensaver]
+picture-uri='file:///home/romainprignon/img/screensaver.jpg'
+lock-delay=uint32 300
+picture-options='zoom'
+
+[peripherals/touchpad]
+natural-scroll=true
+tap-to-click=true
+two-finger-scrolling-enabled=true
+
+[peripherals/mouse]
+speed=0.0
+left-handed=false
+
+[search-providers]
+disabled=['org.gnome.Calculator.desktop', 'org.gnome.Characters.desktop', 'org.gnome.Contacts.desktop', 'org.gnome.Software.desktop', 'org.gnome.Terminal.desktop']
+sort-order=['gnome-documents.desktop', 'nautilus.desktop']
+
+[wm/preferences]
+titlebar-font='Ubuntu Medium 11'
+num-workspaces=1
+
+[wm/keybindings]
+move-to-workspace-last=@as []
+move-to-workspace-up=@as []
+move-to-workspace-1=@as []
+switch-to-workspace-left=@as []
+panel-main-menu=@as []
+switch-to-workspace-down=@as []
+move-to-workspace-right=@as []
+switch-to-workspace-right=@as []
+move-to-monitor-left=@as []
+switch-to-workspace-last=@as []
+move-to-monitor-down=@as []
+move-to-workspace-left=@as []
+move-to-monitor-right=@as []
+move-to-workspace-down=@as []
+move-to-monitor-up=@as []
+switch-to-workspace-up=@as []
+switch-windows=['<Alt>Tab']
+switch-windows-backward=['<Shift><Alt>Tab']
+
+[datetime]
+automatic-timezone=true
+
+[background]
+picture-uri='file:///home/romainprignon/img/wallpaper.jpg'
+show-desktop-icons=false
+color-shading-type='solid'
+primary-color='#333333'
+picture-options='zoom'
+secondary-color='#333333'
+
+[input-sources]
+sources=[('xkb', 'fr'), ('xkb', 'us')]
+xkb-options=@as []
+
+[session]
+idle-delay=uint32 300

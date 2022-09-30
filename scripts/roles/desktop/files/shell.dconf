@@ -1,0 +1,66 @@
+[keybindings]
+toggle-message-tray=@as []
+toggle-overview=@as []
+
+[/]
+enabled-extensions=['user-theme@gnome-shell-extensions.gcampax.github.com', 'dash-to-panel@jderose9.github.com', 'sound-output-device-chooser@kgshank.net', 'start-overlay-in-application-view@Hex_cz', 'escape-overview@raelgc', 'AlphabeticalAppGrid@stuarthayhurst', 'unlockDialogBackground@sun.wxg@gmail.com', 'just-perfection-desktop@just-perfection', 'emoji-selector@maestroschan.fr', 'gtktitlebar@velitasali.github.io']
+had-bluetooth-devices-setup=true
+app-picker-view=uint32 1
+favorite-apps=['org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop', 'google-chrome.desktop', 'sublime_text.desktop']
+
+[calendar]
+show-weekdate=false
+
+[window-switcher]
+app-icon-mode='both'
+
+[extensions/user-theme]
+name='Arc-Dark'
+
+[extensions/timer]
+manual-hours=1
+manual-minutes=0
+ui-notification=true
+manual-seconds=0
+
+[extensions/dash-to-panel]
+animate-appicon-hover-animation-extent={'RIPPLE': 4, 'PLANK': 4, 'SIMPLE': 1}
+appicon-margin=1
+appicon-padding=4
+available-monitors=[0]
+dot-style-focused='DASHES'
+dot-style-unfocused='DASHES'
+hotkeys-overlay-combo='TEMPORARILY'
+leftbox-padding=-1
+panel-anchors='{"0":"MIDDLE"}'
+panel-element-positions='{"0":[{"element":"showAppsButton","visible":true,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"leftBox","visible":true,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"centerBox","visible":true,"position":"stackedBR"},{"element":"dateMenu","visible":true,"position":"centerMonitor"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":true,"position":"stackedBR"}]}'
+panel-lengths='{"0":100}'
+panel-sizes='{"0":30}'
+primary-monitor=0
+show-tooltip=false
+show-window-previews=false
+status-icon-padding=-1
+trans-bg-color='#253040'
+trans-use-custom-bg=true
+tray-padding=-1
+window-preview-title-position='TOP'
+
+[extensions/emoji-selector]
+emoji-keybinding=['<Super>e']
+
+[extensions/just-perfection]
+activities-button=true
+app-menu=true
+dash=false
+dash-separator=true
+double-super-to-appgrid=true
+panel=true
+startup-status=0
+theme=false
+window-menu-take-screenshot-button=false
+window-picker-icon=true
+window-preview-caption=true
+window-preview-close-button=true
+workspace=false
+workspace-switcher-should-show=false
+workspaces-in-app-grid=false

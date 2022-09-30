@@ -1,0 +1,9 @@
+---
+- name: terminal
+  hosts: default
+  roles:
+    - role: ../../../../scripts/roles/prompt
+      vars:
+        java_version: 18
+    - role: ../../../../scripts/roles/rc
+    - role: ../../../../scripts/roles/zsh

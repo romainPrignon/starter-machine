@@ -1,0 +1,62 @@
+function tosubl() {
+    TMPDIR=${TMPDIR:-/tmp}  # default to /tmp if TMPDIR isn't set
+    F=$(mktemp $TMPDIR/tosubl-XXXXXXXX)
+    cat >| $F  # use >| instead of > if you set noclobber in bash
+    subl $F
+    sleep .3  # give subl a little time to open the file
+    rm -f $F  # file will be deleted as soon as subl closes it
+}
+
+function webm-to-gif() {
+    ffmpeg -i $1 -pix_fmt rgb8 $2
+}
+
+function webm-to-mp4() {
+    ffmpeg -i $1 -max_muxing_queue_size 9999 $2
+}
+
+function superkill() {
+    sudo kill `sudo lsof -t -i:$1`
+}
+
+function supertouch() {
+    for f in "$@"; do mkdir -p "$(dirname "$f")"; done
+    touch "$@"
+}
+
+function shtd {
+    shutdown +$1
+}
+
+function monit {
+    eval "$1" & top -p $!
+}
+
+function sandbox {
+    name=$1
+    type=$2
+    rm=$3
+
+    case "$type" in
+    gen) image="ubuntu:jammy";volume="-v $name:/root" ;;
+    min) image="romainprignon/ubuntu/jammy";volume="-v $name:/home/romainprignon" ;;
+    *) image="ubuntu:jammy";volume="-v $name:/root" ;;
+    esac
+
+    mkdir -p $HOME/sandbox/$name
+    docker volume create --driver local \
+        --opt type=none \
+        --opt device=$HOME/sandbox/$name \
+        --opt o=bind \
+        $name
+
+    network="--network host"
+
+    docker start -ai $name || docker run -it --name $name $volume $network $image
+
+    if [ "$rm" == "--rm" ]; then
+        docker rm $name
+        docker volume rm $name
+        sudo rm -rf $HOME/sandbox/$name
+    fi
+}

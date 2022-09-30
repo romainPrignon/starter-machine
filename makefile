@@ -5,7 +5,7 @@ builder?=packer
 
 install: # boostrap dev environment ex: make install
 	sudo apt install ansible
-	ansible-galaxy collection install community.general
+	ansible-galaxy collection install --force community.general:3.8.9
 	ansible-galaxy install geerlingguy.swap geerlingguy.php-versions geerlingguy.php geerlingguy.composer geerlingguy.php-xdebug
 
 lint: # lint machine build file ex: make lint machine=desktop-ubuntu-focal [builder=docker]
@@ -23,10 +23,10 @@ build-local: # provision locally using ansible ex: make build-local machine=desk
 	ansible-playbook -vv -c local -i default, ./machines/${machine}/scripts/main.yml
 
 check:
-	echo check the artefactg with tools
+	docker run -it --rm -v ${PWD}/check.sh:/opt/check.sh romainprignon/desktop/ubuntu/${version}:latest bash /opt/check.sh
 
-check-manual:
-	docker run -it --rm romainprignon/desktop/ubuntu/focal:latest
+qa: # manual testing ex: make qa version=focal
+	docker run -it --rm romainprignon/desktop/ubuntu/${version}:latest
 
 release-metal: # release on metal ex: make metal machine=desktop-ubuntu-focal
 	VBoxManage clonehd ./artefacts/vms/${machine}-disk001.vmdk ./artefacts/metal/${machine}.img --format RAW

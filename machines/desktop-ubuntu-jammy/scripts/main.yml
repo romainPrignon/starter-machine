@@ -1,0 +1,6 @@
+---
+- import_playbook: fact.yml
+- import_playbook: system.yml
+- import_playbook: terminal.yml
+- import_playbook: runtime.yml
+- import_playbook: desktop.yml
