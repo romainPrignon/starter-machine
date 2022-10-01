@@ -20,6 +20,7 @@
       - ffmpeg
       - git-extras
       - htop
+      - jq
       - openssl
       - shellcheck
       - sqlite3
