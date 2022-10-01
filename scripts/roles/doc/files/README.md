@@ -1,12 +1,13 @@
 # To Do Manually
 
-## could not automate with ansible (dont know why)
-- sudo snap install --classic git-machete 
-- sudo snap install multipass
-
 ## clone dotfiles
 ```bash
 mkdir -p $HOME/workspace/romainprignon && cd $HOME/workspace/romainprignon && git clone https://github.com/romainPrignon/dotfiles
+```
+
+## install snap
+```bash
+make snap
 ```
 
 ## Swap
