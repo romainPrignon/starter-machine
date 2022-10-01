@@ -1,9 +1,5 @@
 export SHELL="/bin/zsh"
 
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.zsh/zsh-git-prompt/zshrc.sh
-source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
-
 # alias and func
 if [ -f "$HOME/.aliases" ]; then
     . "$HOME/.aliases"
@@ -20,6 +16,12 @@ for f in $HOME/.rc/*.rc; do source $f; done
 autoload -U promptinit && promptinit
 autoload -U colors && colors
 autoload -U compinit && compinit
+
+# plugins
+source ~/.zsh/fzf-tab/fzf-tab.plugin.zsh
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.zsh/zsh-git-prompt/zshrc.sh
+source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 # history
 HISTFILE=~/.zsh_history
