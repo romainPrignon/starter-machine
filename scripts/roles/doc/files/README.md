@@ -10,6 +10,16 @@ mkdir -p $HOME/workspace/romainprignon && cd $HOME/workspace/romainprignon && gi
 make snap
 ```
 
+## install pip pkg
+```bash
+make pip
+```
+
+## install npm pkg
+```bash
+make npm
+```
+
 ## Swap
 - Create swap file if not already done
 ```bash

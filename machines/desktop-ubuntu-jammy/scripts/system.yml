@@ -13,7 +13,6 @@
     - role: ../../../../scripts/roles/gh # when there is config
     - role: ../../../../scripts/roles/git # when there is config
     - role: ../../../../scripts/roles/vim # when there is config
-    - role: ../../../../scripts/roles/n # when there is config
     - role: ../../../../scripts/roles/fzf # when there is config
 
   tasks:

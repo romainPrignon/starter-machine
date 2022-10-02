@@ -1,20 +1,23 @@
 ---
-- name: install latest node
+- name: install node
   tags: node
-  become: yes
-  shell: "/home/{{ ansible_user }}/bin/n latest"
-
-- name: install lts node
-  tags: node
-  become: yes
-  shell: "/home/{{ ansible_user }}/bin/n lts"
-
-- name: install autocompletion
-  tags: node
-  become: yes
-  shell:  npm completion > /etc/bash_completion.d/npm
-  args:
-    creates: /etc/bash_completion.d/npm # run if file not exist
+  vars:
+    asdf_user: "{{ ansible_user }}"
+    asdf_group: "{{ ansible_user }}"
+    asdf_plugin_dependencies:
+      - dirmngr
+      - gpg
+      - curl
+      - gawk
+    asdf_plugins:
+      - name: node
+        repository:  https://github.com/asdf-vm/asdf-nodejs.git
+        versions:
+          - 16.17.1
+          - latest
+        global: 16.17.1
+  include_role:
+    name: cimon-io.asdf
 
 - name: copy npm config
   tags: node
@@ -22,22 +25,3 @@
     src: .npmrc
     dest: "/home/{{ ansible_user }}/.npmrc"
     mode: '0644'
-
-- name: install npm global deps
-  tags: node
-  become: yes
-  shell: >
-    npm install -g \
-      @babel/node \
-      cdktf-cli \
-      depcheck \
-      git-split-diffs \
-      gitmoji-cli \
-      hotel \
-      http-server \
-      pkgcount \
-      thanks \
-      ts-node \
-      types-checker \
-      typescript \
-      zx

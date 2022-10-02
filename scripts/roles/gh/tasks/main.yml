@@ -1,21 +1,14 @@
 ---
-- name: download gh bin
+- name: install gh
   tags: gh
-  get_url: url=https://github.com/cli/cli/releases/download/v2.16.0/gh_2.16.0_linux_amd64.tar.gz dest=/tmp/gh.tar.gz
-
-- name: extract gh bin
-  tags: gh
-  unarchive:
-    src: /tmp/gh.tar.gz
-    dest: /tmp
-    remote_src: yes
-
-- name: install gh bin
-  tags: gh
-  shell: "mv /tmp/gh_2.16.0_linux_amd64/bin/gh /home/{{ ansible_user }}/bin/gh"
-
-- name: set gh permission
-  tags: gh
-  file:
-    path: "/home/{{ ansible_user }}/bin/gh"
-    mode: 'u=rx,g=rx,o=r'
+  vars:
+    asdf_user: "{{ ansible_user }}"
+    asdf_group: "{{ ansible_user }}"
+    asdf_plugins:
+      - name: github-cli
+        repository:  https://github.com/bartlomiejdanek/asdf-github-cli.git
+        versions:
+          - 2.16.1
+        global: 2.16.1
+  include_role:
+    name: cimon-io.asdf

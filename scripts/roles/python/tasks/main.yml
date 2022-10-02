@@ -1,17 +1,26 @@
 ---
-- name: install python deps
+- name: install python deps # because asdf_plugin_dependencies do not work ??
   tags: python
   become: yes
   apt:
     pkg:
+      - build-essential
       - curl
-      - git
+      - llvm
+      - make
+      - wget
       - zlib1g-dev
+      - xz-utils
+      - tk-dev
+      - libxml2-dev
+      - libxmlsec1-dev
+      - liblzma-dev
       - libffi-dev
+      - libssl-dev
       - libbz2-dev
       - libreadline-dev
-      - libssl-dev
       - libsqlite3-dev
+      - libncursesw5-dev
     state: present
     update_cache: yes
     autoclean: yes
@@ -19,52 +28,28 @@
 
 - name: install python
   tags: python
-  shell: curl -sSL https://pyenv.run | bash
-  args:
-    creates: "/home/{{ ansible_user }}/.pyenv/bin/pyenv" # run if file not exist
-
-- name: install poetry deps
-  tags: python
-  become: yes
-  apt:
-    pkg:
-      - python3-pip
-      - python3-venv
-    state: present
-    update_cache: yes
-    autoclean: yes
-    autoremove: yes
-
-- name: configure python alternative
-  tags: python
-  become: yes
-  community.general.alternatives:
-    name: python
-    link: /usr/bin/python
-    path: /usr/bin/python3
-
-- name: configure pip alternative
-  tags: python
-  become: yes
-  community.general.alternatives:
-    name: pip
-    link: /usr/bin/pip
-    path: /usr/bin/pip3
-
-- name: download poetry
-  tags: python
-  get_url:
-    url: https://install.python-poetry.org
-    dest: /tmp/install-poetry.py
+  vars:
+    asdf_user: "{{ ansible_user }}"
+    asdf_group: "{{ ansible_user }}"
+    asdf_plugins:
+      - name: python
+        repository:  https://github.com/asdf-community/asdf-python.git
+        versions:
+          - 3.8.2
+        global: 3.8.2
+  include_role:
+    name: cimon-io.asdf
 
 - name: install poetry
   tags: python
-  command: python3 /tmp/install-poetry.py
-
-- name: install python global deps
-  tags: python
-  shell: >
-    pip install \
-      ansible \
-      git-machete \
-      zxpy
+  vars:
+    asdf_user: "{{ ansible_user }}"
+    asdf_group: "{{ ansible_user }}"
+    asdf_plugins:
+      - name: poetry
+        repository:  https://github.com/asdf-community/asdf-poetry.git
+        versions:
+          - 1.2.1
+        global: 1.2.1
+  include_role:
+    name: cimon-io.asdf
