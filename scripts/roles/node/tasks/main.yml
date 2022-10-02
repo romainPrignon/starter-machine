@@ -2,12 +2,12 @@
 - name: install latest node
   tags: node
   become: yes
-  shell: "{{ ansible_env.HOME }}/bin/n latest"
+  shell: "/home/{{ ansible_user }}/bin/n latest"
 
 - name: install lts node
   tags: node
   become: yes
-  shell: "{{ ansible_env.HOME }}/bin/n lts"
+  shell: "/home/{{ ansible_user }}/bin/n lts"
 
 - name: install autocompletion
   tags: node
@@ -20,7 +20,7 @@
   tags: node
   copy:
     src: .npmrc
-    dest: "{{ ansible_env.HOME }}/.npmrc"
+    dest: "/home/{{ ansible_user }}/.npmrc"
     mode: '0644'
 
 - name: install npm global deps

@@ -3,9 +3,9 @@
   tags: fzf
   git:
     repo: https://github.com/junegunn/fzf.git
-    dest: "{{ ansible_env.HOME }}/.fzf"
+    dest: "/home/{{ ansible_user }}/.fzf"
     depth: 1
 
 - name: configure fzf
   tags: fzf
-  shell: "{{ ansible_env.HOME }}/.fzf/install --key-bindings --completion --no-update-rc"
+  shell: "/home/{{ ansible_user }}/.fzf/install --key-bindings --completion --no-update-rc"

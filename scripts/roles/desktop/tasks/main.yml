@@ -49,14 +49,14 @@
 - name: create img dir
   tags: desktop
   file:
-    path: "{{ ansible_env.HOME }}/img"
+    path: "/home/{{ ansible_user }}/img"
     state: directory
 
 - name: copy img
   tags: desktop
   copy:
     src: "{{ item }}"
-    dest: "{{ ansible_env.HOME }}/img/{{ item }}"
+    dest: "/home/{{ ansible_user }}/img/{{ item }}"
     mode: '0770'
   with_items:
     - screensaver.jpg
@@ -125,6 +125,6 @@
 - name: set login background
   tags: desktop
   become: yes
-  shell: "/tmp/ubuntu-gdm-set-background-main/ubuntu-gdm-set-background --image {{ ansible_env.HOME }}/img/screensaver.jpg"
+  shell: "/tmp/ubuntu-gdm-set-background-main/ubuntu-gdm-set-background --image /home/{{ ansible_user }}/img/screensaver.jpg"
   register: result
   failed_when: result.rc != 1

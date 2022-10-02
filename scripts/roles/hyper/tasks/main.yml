@@ -1,19 +1,19 @@
 ---
 - name: download hyper app
   tags: hyper
-  get_url: "url=https://releases.hyper.is/download/AppImage dest={{ ansible_env.HOME }}/app/hyper.AppImage"
+  get_url: "url=https://releases.hyper.is/download/AppImage dest=/home/{{ ansible_user }}/app/hyper.AppImage"
 
 - name: set hyper permission
   tags: hyper
   file:
-    path: "{{ ansible_env.HOME }}/app/hyper.AppImage"
+    path: "/home/{{ ansible_user }}/app/hyper.AppImage"
     mode: 'u=rx,g=rx,o=rx'
 
 - name: copy hyper config
   tags: hyper
   copy:
     src: "{{ item }}"
-    dest: "{{ ansible_env.HOME }}/{{ item }}"
+    dest: "/home/{{ ansible_user }}/{{ item }}"
     mode: '0644'
   with_items:
     - .hyper.js

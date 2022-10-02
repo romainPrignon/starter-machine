@@ -12,10 +12,10 @@
 
 - name: install jetbrain app
   tags: jetbrain
-  shell: "mv /tmp/jetbrains-toolbox-1.26.0.13072/jetbrains-toolbox {{ ansible_env.HOME }}/app/jetbrains-toolbox"
+  shell: "mv /tmp/jetbrains-toolbox-1.26.0.13072/jetbrains-toolbox /home/{{ ansible_user }}/app/jetbrains-toolbox"
 
 - name: set jetbrain permission
   tags: jetbrain
   file:
-    path: "{{ ansible_env.HOME }}/app/jetbrains-toolbox"
+    path: "/home/{{ ansible_user }}/app/jetbrains-toolbox"
     mode: 'u=rx,g=rx,o=r'

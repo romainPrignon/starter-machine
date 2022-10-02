@@ -1,6 +1,7 @@
 ---
 - name: runtime
   hosts: default
+  gather_facts: yes
 
   # - role: multipass
   roles:

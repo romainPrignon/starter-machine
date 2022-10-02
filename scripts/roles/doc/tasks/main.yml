@@ -3,5 +3,5 @@
   tags: doc
   copy:
     src: README.md
-    dest: "{{ ansible_env.HOME }}/README.md"
+    dest: "/home/{{ ansible_user }}/README.md"
     mode: '0644'

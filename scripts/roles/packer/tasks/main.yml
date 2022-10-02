@@ -14,10 +14,10 @@
 
 - name: install packer
   tags: packer
-  shell: "mv /tmp/packer {{ ansible_env.HOME }}/bin/packer"
+  shell: "mv /tmp/packer /home/{{ ansible_user }}/bin/packer"
 
 - name: set packer permission
   tags: packer
   file:
-    path: "{{ ansible_env.HOME }}/bin/packer"
+    path: "/home/{{ ansible_user }}/bin/packer"
     mode: 'u=rx,g=rx,o=r'

@@ -2,7 +2,7 @@
 - name: create .composer dir
   tags: php
   file:
-    path: "{{ ansible_env.HOME }}/.composer"
+    path: "/home/{{ ansible_user }}/.composer"
     state: directory
 
 - name: define php version
@@ -41,7 +41,7 @@
 
 - name: install composer
   vars:
-    composer_path: "{{ ansible_env.HOME }}/bin/composer"
+    composer_path: "/home/{{ ansible_user }}/bin/composer"
   include_role:
     name: geerlingguy.composer
     apply:
@@ -51,15 +51,15 @@
   tags: php
   copy:
     src: composer.json
-    dest: "{{ ansible_env.HOME }}/.composer/composer.json"
+    dest: "/home/{{ ansible_user }}/.composer/composer.json"
     mode: '0644'
 
 # - name: install composer global deps
 #   tags: php
-#   shell: "{{ ansible_env.HOME }}/bin/composer global install"
+#   shell: "/home/{{ ansible_user }}/bin/composer global install"
 
 - name: install symfony
   tags: php
   shell: wget https://get.symfony.com/cli/installer -O - | bash
   args:
-    creates: "{{ ansible_env.HOME }}/.symfony/bin/symfony" # run if file not exist
+    creates: "/home/{{ ansible_user }}/.symfony/bin/symfony" # run if file not exist

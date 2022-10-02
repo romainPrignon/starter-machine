@@ -14,27 +14,27 @@
   tags: prompt
   git:
     repo: https://github.com/magicmonty/bash-git-prompt.git
-    dest: "{{ ansible_env.HOME }}/.bash-git-prompt"
+    dest: "/home/{{ ansible_user }}/.bash-git-prompt"
 
 - name: copy .aliases
   tags: prompt
   copy:
     src: .aliases
-    dest: "{{ ansible_env.HOME }}/.aliases"
+    dest: "/home/{{ ansible_user }}/.aliases"
     mode: '0644'
 
 - name: copy .bashrc
   tags: prompt
   copy:
     src: .bashrc
-    dest: "{{ ansible_env.HOME }}/.bashrc"
+    dest: "/home/{{ ansible_user }}/.bashrc"
     mode: '0644'
 
 - name: copy .exports
   tags: prompt
   template:
     src: ../files/.exports
-    dest: "{{ ansible_env.HOME }}/.exports"
+    dest: "/home/{{ ansible_user }}/.exports"
     mode: '0644'
   vars:
     _java_version: "{{ java_version }}"
@@ -43,26 +43,26 @@
   tags: prompt
   copy:
     src: .functions
-    dest: "{{ ansible_env.HOME }}/.functions"
+    dest: "/home/{{ ansible_user }}/.functions"
     mode: '0644'
 
 - name: copy .inputrc
   tags: prompt
   copy:
     src: .inputrc
-    dest: "{{ ansible_env.HOME }}/.inputrc"
+    dest: "/home/{{ ansible_user }}/.inputrc"
     mode: '0644'
 
 - name: copy .profile
   tags: prompt
   copy:
     src: .profile
-    dest: "{{ ansible_env.HOME }}/.profile"
+    dest: "/home/{{ ansible_user }}/.profile"
     mode: '0644'
 
 - name: copy Single_line_Ubuntu_Romain.bgptheme
   tags: prompt
   copy:
     src: Single_line_Ubuntu_Romain.bgptheme
-    dest: "{{ ansible_env.HOME }}/.bash-git-prompt/themes/Single_line_Ubuntu_Romain.bgptheme"
+    dest: "/home/{{ ansible_user }}/.bash-git-prompt/themes/Single_line_Ubuntu_Romain.bgptheme"
     mode: '0644'

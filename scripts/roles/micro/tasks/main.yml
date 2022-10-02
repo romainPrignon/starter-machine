@@ -2,7 +2,7 @@
 - name: create micro config dir
   tags: micro
   file:
-    path: "{{ ansible_env.HOME }}/.config/micro"
+    path: "/home/{{ ansible_user }}/.config/micro"
     state: directory
 
 - name: install micro deps
@@ -20,12 +20,12 @@
   tags: micro
   shell: curl -sSL https://getmic.ro | bash
   args:
-    chdir: "{{ ansible_env.HOME }}/bin"
-    creates: "{{ ansible_env.HOME }}/bin/micro" # run if file not exist
+    chdir: "/home/{{ ansible_user }}/bin"
+    creates: "/home/{{ ansible_user }}/bin/micro" # run if file not exist
 
 - name: copy micro config
   tags: micro
   copy:
     src: settings.json
-    dest: "{{ ansible_env.HOME }}/.config/micro/settings.json"
+    dest: "/home/{{ ansible_user }}/.config/micro/settings.json"
     mode: '0644'

@@ -14,11 +14,11 @@
   tags: deno
   shell: curl -sSL https://deno.land/x/install/install.sh | bash
   args:
-    creates: "{{ ansible_env.HOME }}/.deno/bin/deno" # run if file not exist
+    creates: "/home/{{ ansible_user }}/.deno/bin/deno" # run if file not exist
 
 - name: install deno autocompletion
   tags: deno
   become: yes
-  shell: "{{ ansible_env.HOME }}/.deno/bin/deno completions bash > /etc/bash_completion.d/deno"
+  shell: "/home/{{ ansible_user }}/.deno/bin/deno completions bash > /etc/bash_completion.d/deno"
   args:
     creates: /etc/bash_completion.d/deno # run if file not exist

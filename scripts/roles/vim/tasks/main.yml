@@ -14,5 +14,5 @@
   tags: vim
   copy:
     src: .vimrc
-    dest: "{{ ansible_env.HOME }}/.vimrc"
+    dest: "/home/{{ ansible_user }}/.vimrc"
     mode: '0644'

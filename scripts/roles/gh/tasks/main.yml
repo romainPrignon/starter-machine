@@ -12,10 +12,10 @@
 
 - name: install gh bin
   tags: gh
-  shell: "mv /tmp/gh_2.16.0_linux_amd64/bin/gh {{ ansible_env.HOME }}/bin/gh"
+  shell: "mv /tmp/gh_2.16.0_linux_amd64/bin/gh /home/{{ ansible_user }}/bin/gh"
 
 - name: set gh permission
   tags: gh
   file:
-    path: "{{ ansible_env.HOME }}/bin/gh"
+    path: "/home/{{ ansible_user }}/bin/gh"
     mode: 'u=rx,g=rx,o=r'

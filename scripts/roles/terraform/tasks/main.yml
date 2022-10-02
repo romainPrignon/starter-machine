@@ -12,10 +12,10 @@
 
 - name: install terraform bin
   tags: terraform
-  shell: "mv /tmp/terraform {{ ansible_env.HOME }}/bin/terraform"
+  shell: "mv /tmp/terraform /home/{{ ansible_user }}/bin/terraform"
 
 - name: set terraform permission
   tags: terraform
   file:
-    path: "{{ ansible_env.HOME }}/bin/terraform"
+    path: "/home/{{ ansible_user }}/bin/terraform"
     mode: 'u=rx,g=rx,o=r'

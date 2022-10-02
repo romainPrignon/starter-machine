@@ -14,12 +14,12 @@
   tags: git
   copy:
     src: .gitignore
-    dest: "{{ ansible_env.HOME }}/.gitignore"
+    dest: "/home/{{ ansible_user }}/.gitignore"
     mode: '0644'
 
 - name: copy .gitconfig
   tags: git
   copy:
     src: .gitconfig
-    dest: "{{ ansible_env.HOME }}/.gitconfig"
+    dest: "/home/{{ ansible_user }}/.gitconfig"
     mode: '0644'

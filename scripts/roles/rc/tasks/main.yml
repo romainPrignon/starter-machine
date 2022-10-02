@@ -2,12 +2,12 @@
 - name: create rc dir
   tags: rc
   file:
-    path: "{{ ansible_env.HOME }}/.rc"
+    path: "/home/{{ ansible_user }}/.rc"
     state: directory
 
 - name: copy common rc
   tags: rc
   copy:
     src: common.rc
-    dest: "{{ ansible_env.HOME }}/.rc/common.rc"
+    dest: "/home/{{ ansible_user }}/.rc/common.rc"
     mode: '0644'

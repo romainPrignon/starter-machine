@@ -2,14 +2,14 @@
 - name: create gtk config dir
   tags: gtk
   file:
-    path: "{{ ansible_env.HOME }}/.config/gtk-3.0"
+    path: "/home/{{ ansible_user }}/.config/gtk-3.0"
     state: directory
 
 - name: copy gtk config
   tags: gtk
   copy:
     src: "{{ item }}"
-    dest: "{{ ansible_env.HOME }}/.config/gtk-3.0/{{ item }}"
+    dest: "/home/{{ ansible_user }}/.config/gtk-3.0/{{ item }}"
     mode: '0644'
   with_items:
     - bookmarks

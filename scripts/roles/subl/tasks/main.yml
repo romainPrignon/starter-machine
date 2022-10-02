@@ -2,7 +2,7 @@
 - name: create subl config dir
   tags: subl
   file:
-    path: "{{ ansible_env.HOME }}/.config/sublime-text-3/Packages/User"
+    path: "/home/{{ ansible_user }}/.config/sublime-text-3/Packages/User"
     state: directory
 
 - name: fetch subl app
@@ -22,19 +22,19 @@
   tags: subl
   copy:
     src: Default-(Linux).sublime-keymap
-    dest: "{{ ansible_env.HOME }}/.config/sublime-text-3/Packages/User/Default\ (Linux).sublime-keymap"
+    dest: "/home/{{ ansible_user }}/.config/sublime-text-3/Packages/User/Default\ (Linux).sublime-keymap"
     mode: '0644'
 
 - name: copy preferences sublime-settings config
   tags: subl
   copy:
     src: Preferences.sublime-settings
-    dest: "{{ ansible_env.HOME }}/.config/sublime-text-3/Packages/User/Preferences.sublime-settings"
+    dest: "/home/{{ ansible_user }}/.config/sublime-text-3/Packages/User/Preferences.sublime-settings"
     mode: '0644'
 
 - name: copy package control sublime-settings config
   tags: subl
   copy:
     src: Package-Control.sublime-settings
-    dest: "{{ ansible_env.HOME }}/.config/sublime-text-3/Packages/User/Package\ Control.sublime-settings"
+    dest: "/home/{{ ansible_user }}/.config/sublime-text-3/Packages/User/Package\ Control.sublime-settings"
     mode: '0644'

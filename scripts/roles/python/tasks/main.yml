@@ -21,7 +21,7 @@
   tags: python
   shell: curl -sSL https://pyenv.run | bash
   args:
-    creates: "{{ ansible_env.HOME }}/.pyenv/bin/pyenv" # run if file not exist
+    creates: "/home/{{ ansible_user }}/.pyenv/bin/pyenv" # run if file not exist
 
 - name: install poetry deps
   tags: python

@@ -2,7 +2,7 @@
 - name: create .zsh dir
   tags: zsh
   file:
-    path: "{{ ansible_env.HOME }}/.zsh"
+    path: "/home/{{ ansible_user }}/.zsh"
     state: directory
 
 - name: install zsh deps
@@ -32,60 +32,60 @@
   git:
     depth: 1
     repo: https://github.com/zsh-users/zsh-autosuggestions.git
-    dest: "{{ ansible_env.HOME }}/.zsh/zsh-autosuggestions"
+    dest: "/home/{{ ansible_user }}/.zsh/zsh-autosuggestions"
 
 - name: install zsh plugins zsh-syntax-highlighting
   tags: zsh
   git:
     depth: 1
     repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
-    dest: "{{ ansible_env.HOME }}/.zsh/zsh-syntax-highlighting"
+    dest: "/home/{{ ansible_user }}/.zsh/zsh-syntax-highlighting"
 
 - name: install zsh plugins zsh-git-prompt
   tags: zsh
   git:
     depth: 1
     repo: https://github.com/olivierverdier/zsh-git-prompt.git
-    dest: "{{ ansible_env.HOME }}/.zsh/zsh-git-prompt"
+    dest: "/home/{{ ansible_user }}/.zsh/zsh-git-prompt"
 
 - name: install zsh plugins zsh-history-substring-search
   tags: zsh
   git:
     depth: 1
     repo: https://github.com/zsh-users/zsh-history-substring-search.git
-    dest: "{{ ansible_env.HOME }}/.zsh/zsh-history-substring-search"
+    dest: "/home/{{ ansible_user }}/.zsh/zsh-history-substring-search"
 
 - name: install zsh plugins fzf-tab
   tags: zsh
   git:
     depth: 1
     repo: https://github.com/Aloxaf/fzf-tab
-    dest: "{{ ansible_env.HOME }}/.zsh/fzf-tab"
+    dest: "/home/{{ ansible_user }}/.zsh/fzf-tab"
 
 - name: copy .zprofile
   tags: zsh
   copy:
     src: .zprofile
-    dest: "{{ ansible_env.HOME }}/.zprofile"
+    dest: "/home/{{ ansible_user }}/.zprofile"
     mode: '0644'
 
 - name: copy .zshrc
   tags: zsh
   copy:
     src: .zshrc
-    dest: "{{ ansible_env.HOME }}/.zshrc"
+    dest: "/home/{{ ansible_user }}/.zshrc"
     mode: '0644'
 
 - name: copy gitstatus.py
   tags: zsh
   copy:
     src: gitstatus.py
-    dest: "{{ ansible_env.HOME }}/.zsh/zsh-git-prompt/gitstatus.py"
+    dest: "/home/{{ ansible_user }}/.zsh/zsh-git-prompt/gitstatus.py"
     mode: '0644'
 
 - name: copy zsh-git-prompt.sh
   tags: zsh
   copy:
     src: zsh-git-prompt.sh
-    dest: "{{ ansible_env.HOME }}/.zsh/zsh-git-prompt/zshrc.sh"
+    dest: "/home/{{ ansible_user }}/.zsh/zsh-git-prompt/zshrc.sh"
     mode: '0644'
