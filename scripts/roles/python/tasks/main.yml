@@ -65,5 +65,6 @@
   tags: python
   shell: >
     pip install \
-      git-machete
+      ansible \
+      git-machete \
       zxpy

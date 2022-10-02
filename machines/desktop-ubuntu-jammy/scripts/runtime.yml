@@ -4,7 +4,6 @@
 
   # - role: multipass
   roles:
-    - role: ../../../../scripts/roles/ansible
     - role: ../../../../scripts/roles/docker
     - role: ../../../../scripts/roles/packer
     - role: ../../../../scripts/roles/node

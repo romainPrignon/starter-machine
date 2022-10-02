@@ -46,6 +46,8 @@ key <CAPS> {};
 - GRUB_TIMEOUT_STYLE=menu
 - GRUB_TIMEOUT=1
 - GRUB_CMDLINE_LINUX_DEFAULT="splash quiet" => GRUB_CMDLINE_LINUX_DEFAULT="text quiet"
+- OR
+- GRUB_CMDLINE_LINUX_DEFAULT="splash quiet" => GRUB_CMDLINE_LINUX_DEFAULT="nosplash"
 - sudo update-grub
 
 
