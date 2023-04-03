@@ -1,7 +1,0 @@
----
-- name: install n
-  tags: n
-  get_url:
-    url: https://raw.githubusercontent.com/tj/n/master/bin/n
-    dest: "/home/{{ ansible_user }}/bin/n"
-    mode: 'u=rx,g=rx,o=r'

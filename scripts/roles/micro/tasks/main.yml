@@ -5,23 +5,19 @@
     path: "/home/{{ ansible_user }}/.config/micro"
     state: directory
 
-- name: install micro deps
-  tags: micro
-  become: yes
-  apt:
-    pkg:
-      - curl
-    state: present
-    update_cache: yes
-    autoclean: yes
-    autoremove: yes
-
 - name: install micro
   tags: micro
-  shell: curl -sSL https://getmic.ro | bash
-  args:
-    chdir: "/home/{{ ansible_user }}/bin"
-    creates: "/home/{{ ansible_user }}/bin/micro" # run if file not exist
+  vars:
+    asdf_user: "{{ ansible_user }}"
+    asdf_group: "{{ ansible_user }}"
+    asdf_plugins:
+      - name: micro
+        repository:  https://github.com/YR-ZR0/asdf-micro.git
+        versions:
+          - 2.0.4
+        global: 2.0.4
+  include_role:
+    name: cimon-io.asdf
 
 - name: copy micro config
   tags: micro

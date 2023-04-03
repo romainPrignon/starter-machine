@@ -6,7 +6,7 @@ builder?=packer
 install: # boostrap dev environment ex: make install
 	sudo apt install ansible
 	ansible-galaxy collection install --force community.general:3.8.9
-	ansible-galaxy install geerlingguy.swap geerlingguy.php-versions geerlingguy.php geerlingguy.composer geerlingguy.php-xdebug
+	ansible-galaxy install geerlingguy.swap geerlingguy.php-versions geerlingguy.php geerlingguy.composer geerlingguy.php-xdebug cimon-io.asdf
 
 lint: # lint machine build file ex: make lint machine=desktop-ubuntu-focal [builder=docker]
 	packer validate -var-file=./machines/${machine}/builders/${builder}/${machine}.var.json ./machines/${machine}/builders/${builder}/${machine}.machine.json

@@ -1,21 +1,14 @@
 ---
-- name: download terraform bin
+- name: install terraform
   tags: terraform
-  get_url: url=https://releases.hashicorp.com/terraform/1.3.0/terraform_1.3.0_linux_amd64.zip dest=/tmp/terraform.zip
-
-- name: extract terraform bin
-  tags: terraform
-  unarchive:
-    src: /tmp/terraform.zip
-    dest: /tmp
-    remote_src: yes
-
-- name: install terraform bin
-  tags: terraform
-  shell: "mv /tmp/terraform /home/{{ ansible_user }}/bin/terraform"
-
-- name: set terraform permission
-  tags: terraform
-  file:
-    path: "/home/{{ ansible_user }}/bin/terraform"
-    mode: 'u=rx,g=rx,o=r'
+  vars:
+    asdf_user: "{{ ansible_user }}"
+    asdf_group: "{{ ansible_user }}"
+    asdf_plugins:
+      - name: terraform
+        repository:  https://github.com/asdf-community/asdf-hashicorp.git
+        versions:
+          - 1.3.1
+        global: 1.3.1
+  include_role:
+    name: cimon-io.asdf
